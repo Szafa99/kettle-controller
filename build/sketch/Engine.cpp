@@ -1,0 +1,21 @@
+#line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\Engine.cpp"
+#include "Engine.h"
+#include "Machine.h"
+
+void Engine::handleEngineCycles(){
+    if( Machine::getInstance().workingTime.timerEnded() ) return;
+
+    if(isOffTime.toSeconds()>0 ){
+        if(!isOffTime--)
+            turnON();
+    } 
+    else if(isOnTime.toSeconds()>0){
+        if(!isOnTime--) 
+            turnOFF();           
+    }
+    else{
+        isOffTime=engineOffPeriod;
+        isOnTime=engineOffPeriod;
+    }
+  
+}

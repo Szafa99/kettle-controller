@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<head><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebSocket Test</title>
+
+<script language="javascript" type="text/javascript">
+
+var url = "ws://192.168.4.1:1337/";
+var output;
+var setTemp;
+var websocket;
+
+let machineMin=0;
+let machineSec=0;
+
+let machineTimer;
+
+function tickMachineTime(){
+    machineSec = machineSec==0 ? 59 : machineSec-1;
+      if(machineSec==59 ){
+          if(machineMin==0){
+             turnMachineOff();
+             return;
+            }
+           else
+            machineMin--; 
+        }
+     document.getElementById("machineTimer").innerText =
+                                         ('0'+machineMin).slice(-2)+" : "+('0'+machineSec).slice(-2) + " min";     
+    machineTimer = setTimeout( ()=> tickMachineTime(),1000);    
+    // turnMachineOn();                                    
+}
+
+
+function map(text){
+       
+    //    if( text.data.includes("getTemp") ) return "getTemp";
+       if( text.data.includes("ds18b20Temp") ) return "ds18b20Temp";
+       if( text.data.includes("setAimedTemp")) return "setAimedTemp";
+    //    if( text.data.includes("getAimedTemp")) return "getAimedTemp";
+       if( text.data.includes("setMachineState")) return "setMachineState";
+    //    if( text.data.includes("getMachineState")) return "getMachineState";
+       if( text.data.includes("setMachineTime")) return "setMachineTime";
+    //    if( text.data.includes("getMachineTime")) return "getMachineTime";
+       if( text.data.includes("setEngineTimeOn")) return "setEngineTimeOn";
+    //    if( text.data.includes("getEngineTimeOn")) return "getEngineTimeOn";
+       if( text.data.includes("setEngineTimeOff")) return "setEngineTimeOff";
+    //    if( text.data.includes("getEngineTimeOff")) return "getEngineTimeOff";
+
+       console.log("Can't handle "+ text.data);
+       return;
+}
+// Call this to connect to the WebSocket server
+function wsConnect(url) {
+    console.log("connecting");
+    // Connect to WebSocket server
+    websocket = new WebSocket("ws://192.168.4.1:1337/");
+    
+    // Assign callbacks
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+
+            
+
+}
+
+// Called when a WebSocket connection is established with the server
+function onOpen(evt) {
+
+    // Log connection state
+    console.log("Connected");
+    // Get the current temperature
+}
+
+// Called when the WebSocket connection is closed
+function onClose(evt) {
+    console.log("Disconnected");
+    setTimeout(function() { wsConnect(url) }, 2000);
+}
+
+function turnMachineOff(){
+    document.getElementById("machineState").style.backgroundColor="green";
+    document.getElementById("machineState").innerText="Włącz kocioł";
+    document.getElementById("machineState").value=0;
+}
+
+function turnMachineOn(){
+    document.getElementById("machineState").style.backgroundColor="red";
+    document.getElementById("machineState").innerText="Wyłącz kocioł";
+    document.getElementById("machineState").value=1;  
+}
+
+// Called when a message is received from the server
+function onMessage(evt) {
+    console.log("Message " + evt.data)
+    switch(map(evt)){
+        case "setAimedTemp":
+            document.getElementById("aimedTemp").innerText = evt.data.substr("setAimedTemp".length,evt.data.length) + " ℃";            
+            break;
+        case "ds18b20Temp" :
+            document.getElementById("ds18b20Temp").innerText = evt.data.substr("ds18b20Temp".length,evt.data.length) + " ℃";
+            setTimeout( ()=>{
+                if(websocket.readyState == WebSocket.OPEN)
+                doSend("getTemp");
+                doSend("getAimedTemp");
+            },10000);
+        break;
+        case "setMachineState":
+            const state = evt.data.substr("setMachineState".length,evt.data.length);
+            if(state==1){
+                turnMachineOn();
+                machineTimer = setTimeout( ()=> tickMachineTime(),1000 );    
+            }
+
+            else if(state==0){
+                turnMachineOff();
+                clearTimeout(machineTimer);
+            }
+            break;
+        case "setMachineTime":
+            const newMachineTime = evt.data.substr("setMachineTime".length,evt.data.length);
+            machineMin=newMachineTime.substr(0,2);
+            machineSec=newMachineTime.substr(3,5);
+            document.getElementById("machineTime").innerText=newMachineTime + " min";
+            break;
+        case "setEngineTimeOn":    
+            const engineTimeOn = evt.data.substr("setEngineTimeOn".length,evt.data.length);
+            document.getElementById("engineTimeOn").innerText=engineTimeOn + " min";
+            console.log("Changin timeon" + engineTimeOn);
+            break;
+        case "setEngineTimeOff":    
+            const engineTimeOff = evt.data.substr("setEngineTimeOff".length,evt.data.length);
+            console.log("Changin timeofff" + engineTimeOff);
+            document.getElementById("engineTimeOff").innerText=engineTimeOff + " min";
+            break;
+            
+        }
+
+}
+
+// Called when a WebSocket error occurs
+function onError(evt) {
+    console.log("ERROR: " + evt.data);
+}
+
+// Sends a message to the server (and prints it to the console)
+function doSend(message) {
+    console.log("Sending: " + message);
+    websocket.send(message);
+}
+
+function changeAimedTemp() {
+    const newTemp=document.getElementById("newTemp").value;
+    doSend(newTemp+"setAimedTemp");
+}
+
+
+
+function toggleMachine(){
+    const state = document.getElementById("machineState").value^=1;
+    doSend(state+"setMachineState");
+}
+
+
+function changeMachineTime(){
+    const machineMin=document.getElementById("newMachineMin").value;
+    const machineSec=document.getElementById("newMachineSec").value;
+    doSend("setMachineTime"+machineMin+":"+machineSec)
+}
+
+function changeEngineTimeOff(){
+    const machineMin=document.getElementById("newMinEngineOff").value;
+    const machineSec=document.getElementById("newSecEngineOff").value;
+    doSend("setEngineTimeOff"+machineMin+":"+machineSec)
+}
+
+function changeEngineTimeOn(){
+    const machineMin=document.getElementById("newMinEngineOn").value;
+    const machineSec=document.getElementById("newSecEngineOn").value;
+    doSend("setEngineTimeOn"+machineMin+":"+machineSec)
+}
+
+// Call the init function as soon as the page loads
+window.onload=wsConnect;
+
+
+</script>
+
+<html style='text-align: center;align-items: center;background-color: darkslategrey;color: antiquewhite;'>
+        
+
+<div id="rootDiv" style="width: 85%; margin:0 auto;text-align: center;" >
+        <div class="mydiv">
+            <div class="left" style="margin-top: 10%;">
+                <h3>Temperatura w zbiorniku</h3>
+                <h3 id="ds18b20Temp" >0 ℃</h3> 
+            </div>
+            <div class="right">
+                <h3>Ustawiona temperatura</h3>
+                <h3 id="aimedTemp">0 ℃</h3>
+                <div style="display: inline-flex;">
+                    <input type="number" min="0" max="100" id="newTemp"/>
+                    <span class="validity"></span>
+                </div>
+                <div style="width: 50%;margin: 0 auto;">
+                    <button onclick="changeAimedTemp()">Zmień</button> 
+                </div> 
+            </div>
+        </div>
+<div style="margin-top: 5%;"></div>
+        <div class="mydiv">
+            <div class="left"  >
+                <h3>Ustawiony czas pracy</h3>
+                <h3 id="machineTime">00:00 min</h3>    
+
+                    <div style="display:inline-block;width: 40%;">
+                        <label >min </label>
+                        <input type="number" min=0 max="99" id="newMachineMin" value="00" style="text-align: center;"/>
+                    </div>
+                    :
+                    <div style="display: inline-block;width: 40%;">
+                        <label >sec </label>
+                        <div style="display:inline-flex;">
+                            <input type="number" min=0 max="59" id="newMachineSec" value="00" style="text-align: center;"/> 
+                            <span class="validity"></span>
+                        </div>
+                    </div>
+
+
+                <div style="width: 50%;margin: 0 auto;">
+                <button onclick="changeMachineTime()">Zmień</button> 
+                </div>             
+            </div>
+            <div class="right" style="margin-top:10% ;" >
+                <h3>Pozostały czas pracy</h3>
+                <h3 id="machineTimer">00:00 min</h3>             
+            </div>
+        </div>
+<div style="margin-top: 5%;"></div>
+        <div class="mydiv">
+            <div class="left">
+                 <h3>Wlacz mieszadlo co</h3>               
+                 <h2 id="engineTimeOff">00:00 min</h2>
+
+                 <div style="display:inline-block;width: 40%;">
+                    <label >min </label>
+                    <input type="number" min=0 max="99" id="newMinEngineOff" value="00" style="text-align: center;"/>
+                </div>
+                :
+                <div style="display: inline-block;width: 40%;">
+                    <label >sec </label>
+                    <div style="display:inline-flex;">
+                        <input type="number" min=0 max="59" id="newSecEngineOff" value="00" style="text-align: center;"/> 
+                        <span class="validity"></span>
+                    </div>
+                </div>
+                <div style="width: 50%;margin: 0 auto;">
+                    <button onclick="changeEngineTimeOff()">Zmień</button> 
+                </div>
+            </div>
+
+             <div class="right">
+                     <h3>Wlacz mieszadlo na</h3>
+                     <h2 id="engineTimeOn">00:00 min</h2>
+                     <div style="display:inline-block;width: 40%;">
+                        <label >min </label>
+                        <input type="number" min=0 max="99" id="newMinEngineOn" value="00" style="text-align: center;"/>
+                    </div>
+                    :
+                    <div style="display: inline-block;width: 40%;">
+                        <label >sec </label>
+                        <div style="display:inline-flex;">
+                            <input type="number" min=0 max="59" id="newSecEngineOn" value="00" style="text-align: center;"/> 
+                            <span class="validity"></span>
+                        </div>
+                    </div><div style="width: 50%;margin: 0 auto;">
+                     <button onclick="changeEngineTimeOn()">Zmień</button> 
+                     </div>             
+             </div>
+         </div>
+
+        <h3><button   id="machineState" style="background-color: green;" onclick="toggleMachine()" value="1">Włącz kocioł</button></h3>
+
+    
+
+        <style>
+        input, label {
+            display:block;
+        }
+
+            input:invalid+span::after {
+          position: absolute;
+          content: '✖';
+          padding-left: 5px;
+        }
+        
+        input:valid+span::after {
+          position: absolute;
+          content: '✓';
+          padding-left: 5px;
+        }
+            button {
+          background-color: #04AA6D;
+          border: none;
+          color: white;
+          padding: 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 20px 2px;
+          border-radius: 33%;
+        }
+        
+        .mydiv{
+            border: white;
+            border-width: thin;
+            border-style: solid;
+            display: inline-block;
+            padding: 20px;
+            width: 90%;
+        }
+        
+        .right {
+          float: right;
+          padding: 10px;
+          width: 40%;
+        }
+        .left {
+          float: left;
+          padding: 10px;
+          width: 40%;
+        }
+        </style>
+</html>
