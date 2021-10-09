@@ -2,6 +2,7 @@
 #include "network.h"
 #include "Machine.h"
 #include "Encoder.h"
+#include "MainUI.h"
 
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
@@ -13,19 +14,17 @@ void IRAM_ATTR timerTick(){
 
 TaskHandle_t HardwereTasks;
  void test(void  *arg){
-  Serial.printf("Starting on core : %d",xPortGetCoreID());
   LCD::getInstance();
-  DS18B20::getInstance();
-  Heater::getInstance();
-  Engine::getInstance();
+  MainUI::getInstance().firstRender();
   Encoder::setUp();
   timerAttachInterrupt(Machine::getInstance().machineTimer,&timerTick,true);
-  
 
-    for(;;){
-    LCD::getInstance().lcdControler->render(); 
-    DS18B20::getInstance().updateTemperature();
-    }
+    
+
+    // for(;;){
+    // // LCD::getInstance().lcdControler->render(); 
+    // // DS18B20::getInstance().updateTemperature();
+    // }
  }
    
 void setup() {
@@ -38,17 +37,17 @@ void setup() {
 
 
   // network stuff is runing on default core 1  
-  Network::createAccsesPoint();
-
+  // Network::createAccsesPoint();
+  test(NULL);
   
   // run the application on core 0
-  xTaskCreatePinnedToCore(test,"hardwere",2000,NULL,2,&HardwereTasks,0);
+  // xTaskCreatePinnedToCore(test,"hardwere",2000,NULL,2,&HardwereTasks,0);
 }
 
 
 
 void loop() {  
   // Look for and handle WebSocket data
-  
-  Network::webSocket.loop();
+  Encoder::onEncoderTurn();
+  // Network::webSocket.loop();
 }

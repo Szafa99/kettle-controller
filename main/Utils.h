@@ -11,22 +11,22 @@ struct AlarmTime{
 
   AlarmTime():
     minutes(0),
-    seconds(0){}
+    second(0){}
 
   AlarmTime(int minutes,int seconds):
                     minutes(minutes),
-                    seconds(seconds){}
+                    second(seconds){}
 
   AlarmTime(std::string time){
       std::size_t pos = time.find(":");
       if( pos==std::string::npos || time.substr(pos,time.length()).find(":")>0 ){
         minutes=0;
-        seconds=0;
+        second=0;
       }else{
           minutes = atoi( time.substr(0,pos).c_str() );
-          seconds = atoi( time.substr( pos+1,time.length() ).c_str() );
+          second = atoi( time.substr( pos+1,time.length() ).c_str() );
           if(minutes>99 || minutes<0)  minutes=0;
-          if(seconds>59 || seconds<0)  seconds=0;
+          if(second>59 || second<0)  second=0;
       }
   }
 
@@ -54,23 +54,23 @@ bool operator>= ( AlarmTime& o1){
   }
 
   bool timerEnded(){
-    return !(minutes || seconds);
+    return !(minutes || second);
   }                  
 
 int toSeconds(){
-  return minutes*60+seconds;
+  return minutes*60+second;
 }
 
 //postfix
 bool operator--(){
-      seconds = seconds==0 ? 59 : this->seconds-1;
-      if(seconds==59 )
+      second = second==0 ? 59 : this->second-1;
+      if(second==59 )
           if(minutes==0){
             minutes=99;
             }
            else
             minutes-=1; 
-      return seconds;
+      return second;
 }
 
 //prefix
@@ -80,8 +80,8 @@ bool operator--(int){
 
 bool operator++(){
        
-      seconds = seconds==59 ? 0 : this->seconds+1;
-      if(seconds==0 )
+      second = second==59 ? 0 : this->second+1;
+      if(second==0 )
           if(minutes==99){
             minutes=0;
             return false;
@@ -108,7 +108,7 @@ bool operator++(int){
    bool decreaseMinutes(){
        if(minutes==0){
           minutes=99;
-          seconds=59;
+          second=59;
           return false;
           }
           else
@@ -121,7 +121,7 @@ bool operator++(int){
      bool increaseMinutes(){
           if(minutes==99){
             minutes=0;
-            seconds=0;
+            second=0;
             return false;
             }
           else
@@ -132,13 +132,13 @@ bool operator++(int){
 
     char * toString(){
       char *msg_buf = new char;
-        sprintf(msg_buf, "%02d:%02d",minutes,seconds);      
+        sprintf(msg_buf, "%02d:%02d",minutes,second);      
      return msg_buf;  
    }  
                        
  
   int minutes;
-  int seconds;
+  int second;
   };
     
 

@@ -1,0 +1,342 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\cores\\esp32"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\variants\\esp32"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "WiFi.h",
+    "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "SPIFFS.h",
+    "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\SPIFFS\\src"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "FS.h",
+    "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\FS\\src"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "ESPAsyncWebServer.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "AsyncTCP.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\AsyncTCP-master\\src"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "WebSocketsServer.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\WebSockets\\src"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "WiFiClientSecure.h",
+    "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFiClientSecure\\src"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "OneWire.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\OneWire"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "DallasTemperature.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\DallasTemperature"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "SPI.h",
+    "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\SPI\\src"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "Adafruit_GFX.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_GFX_Library"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "Adafruit_PCD8544.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_PCD8544_Nokia_5110_LCD_library"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "Adafruit_SPIDevice.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_BusIO"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\DS18B20.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\DS18B20_UI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\Engine.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\EngineUI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\LCD.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\Machine.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\MachineUI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\MainUI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\ETH.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFi.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFiAP.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFiClient.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFiGeneric.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFiMulti.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFiSTA.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFiScan.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFiServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFi\\src\\WiFiUdp.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\SPIFFS\\src\\SPIFFS.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\FS\\src\\FS.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\FS\\src\\vfs_api.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src\\AsyncEventSource.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src\\AsyncWebSocket.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src\\SPIFFSEditor.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src\\WebAuthentication.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src\\WebHandlers.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src\\WebRequest.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src\\WebResponses.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\ESPAsyncWebServer-master\\src\\WebServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\AsyncTCP-master\\src\\AsyncTCP.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\WebSockets\\src\\SocketIOclient.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\WebSockets\\src\\WebSockets.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\WebSockets\\src\\WebSocketsClient.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\WebSockets\\src\\WebSocketsServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\WebSockets\\src\\libb64\\cdecode.c",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\WebSockets\\src\\libb64\\cencode.c",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\WebSockets\\src\\libsha1\\libsha1.c",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFiClientSecure\\src\\WiFiClientSecure.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\WiFiClientSecure\\src\\ssl_client.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\OneWire\\OneWire.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\DallasTemperature\\DallasTemperature.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\SPI\\src\\SPI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_GFX_Library\\Adafruit_GFX.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_GFX_Library\\Adafruit_GrayOLED.cpp",
+    "Include": "Wire.h",
+    "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\Wire\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_GFX_Library\\Adafruit_GrayOLED.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_GFX_Library\\Adafruit_SPITFT.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_GFX_Library\\glcdfont.c",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_PCD8544_Nokia_5110_LCD_library\\Adafruit_PCD8544.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_BusIO\\Adafruit_BusIO_Register.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_BusIO\\Adafruit_I2CDevice.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_BusIO\\Adafruit_SPIDevice.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\Wire\\src\\Wire.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]

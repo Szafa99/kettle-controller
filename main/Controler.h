@@ -1,4 +1,7 @@
 #pragma once
+
+
+
 class Renderer{
   public:
     virtual void render()=0;
@@ -11,6 +14,6 @@ class EncoderControler{
     virtual void pushBtn()=0;
 };
 
-class InterfaceControler: public virtual Renderer, public virtual EncoderControler{
+class InterfaceControler: public virtual Renderer, public virtual EncoderControler {
  
  };

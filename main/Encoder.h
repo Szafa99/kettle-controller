@@ -3,75 +3,137 @@
 
 
 namespace Encoder{
-#define INC_TEMP_PIN 16
-#define DEC_TEMP_PIN 5
-#define ENCODER_BTN 17
+#define LEFT 16
+#define RIGHT 17
+#define ENCODER_BTN 5
 
+
+void IRAM_ATTR B_FALL();
+void IRAM_ATTR B_RISE();
+void IRAM_ATTR A_RISE();
+void IRAM_ATTR A_FALL();
+
+
+volatile int pulsesRight,pulsesLeft, A_SIG=0, B_SIG=1;
+volatile int lastPushEncoder = 0,lastTurn=0;
+int checkTime ;
 portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
-volatile int lastEncoded = 0;
-volatile int firstTime = 0;
-volatile int lastChangeTemp=0;
 
-enum ENCODER_STATES{LEFT,NEUTRAL,RIGHT};
 
-ENCODER_STATES encoderState=NEUTRAL;
 
-void IRAM_ATTR onEncoderTurn(){
-  portENTER_CRITICAL(&mux);
+void IRAM_ATTR A_RISE(){
+portENTER_CRITICAL(&mux);
+ lastTurn=millis();
+ detachInterrupt(LEFT);
+ A_SIG=1;
+ 
+ if(B_SIG==0)
+     pulsesRight++;
+ if(B_SIG==1)
+     pulsesLeft++;
+ attachInterrupt(digitalPinToInterrupt(LEFT), A_FALL, FALLING);
 
-int MSB = digitalRead(INC_TEMP_PIN); //MSB = most significant bit
-int LSB = digitalRead(DEC_TEMP_PIN); //LSB = least significant bit
+ portEXIT_CRITICAL(&mux);  
+}
 
-int encoded = (MSB << 1) |LSB; 
-int sum = (lastEncoded << 2) | encoded;
-      if(sum == 13 || sum == 4|| sum == 2 || sum == 11){
-            if(encoderState==RIGHT) 
-                LCD::getInstance().lcdControler->turnRight();            
-            else if(encoderState==NEUTRAL) encoderState=RIGHT;
-            else encoderState=NEUTRAL;
-      }
-     else if(sum == 14 || sum == 7 || sum == 1 || sum == 8 ){ 
-            if(encoderState==LEFT)
-                 LCD::getInstance().lcdControler->turnLeft();
-            else if(encoderState==NEUTRAL) encoderState=LEFT;
-            else encoderState=NEUTRAL;
+void IRAM_ATTR A_FALL(){
+portENTER_CRITICAL(&mux);
+ lastTurn=millis();
+ detachInterrupt(LEFT);
+ A_SIG=0;
+ 
+ if(B_SIG==1)
+     pulsesRight++;
+ if(B_SIG==0)
+     pulsesLeft++;
+ attachInterrupt(LEFT, A_RISE, RISING);  
+ 
+ portEXIT_CRITICAL(&mux);  
+}
 
-      }
-  
-  lastEncoded = encoded; //store this value for next time 
-  lastChangeTemp=millis();
-  portEXIT_CRITICAL(&mux);  
- }
+void IRAM_ATTR B_RISE(){
+portENTER_CRITICAL(&mux);
+ lastTurn=millis();
+ detachInterrupt((RIGHT));
+ B_SIG=1;
+ 
+ if(A_SIG==1)
+    pulsesRight++;
+ 
+ if(A_SIG==0)
+     pulsesLeft++;
+     
+ attachInterrupt(RIGHT, B_FALL, FALLING);
+
+portEXIT_CRITICAL(&mux);  
+}
+
+void IRAM_ATTR B_FALL(){
+portENTER_CRITICAL(&mux);
+ lastTurn=millis();
+ detachInterrupt( RIGHT );
+ B_SIG=0;
+ 
+ if(A_SIG==0)
+    pulsesRight++;
+
+ if(A_SIG==1)
+     pulsesLeft++;
+ attachInterrupt(RIGHT, B_RISE, RISING);
+
+ portEXIT_CRITICAL(&mux);  
+}
 
 
 
  void IRAM_ATTR onEncoderBtn(){
   portENTER_CRITICAL(&mux);
 
-  if(millis()-firstTime>400)
-    firstTime=0;
-    
-  if(firstTime==0 && millis()-lastChangeTemp>300){
+   if( millis()-lastPushEncoder>500 &&  millis()-lastTurn>1000){
     LCD::getInstance().lcdControler->pushBtn();
-    firstTime=millis();
+    lastPushEncoder=millis();
+    lastTurn=millis();
   }
   portEXIT_CRITICAL(&mux);
   }
   
 
+void onEncoderTurn(){
+  // if(checkTime==0)return;
+
+   if(millis()-checkTime>50){
+            if(pulsesRight-pulsesLeft>=2){
+            LCD::getInstance().lcdControler->turnRight();
+            lastTurn=millis();
+            }
+            else if(pulsesLeft-pulsesRight>=2){
+            LCD::getInstance().lcdControler->turnLeft();
+            lastTurn=millis();
+            }
+             pulsesRight=0;
+             pulsesLeft=0;
+             checkTime=millis();
+        }
+}
+
 
   void setUp(){
-  digitalWrite(INC_TEMP_PIN,HIGH);
-  digitalWrite(DEC_TEMP_PIN,HIGH);
+  digitalWrite(LEFT,LOW);
+  digitalWrite(RIGHT,LOW);
   digitalWrite(ENCODER_BTN,HIGH);
       
-  pinMode(INC_TEMP_PIN,INPUT_PULLUP);
-  pinMode(DEC_TEMP_PIN,INPUT_PULLUP);
+  pinMode(LEFT,INPUT);
+  pinMode(RIGHT,INPUT);
   pinMode(ENCODER_BTN,INPUT_PULLUP);
 
-  attachInterrupt(INC_TEMP_PIN,onEncoderTurn,FALLING);
-  attachInterrupt(DEC_TEMP_PIN,onEncoderTurn,FALLING);
+  attachInterrupt(LEFT, A_RISE, RISING);
+  attachInterrupt(RIGHT, B_RISE, RISING);
   attachInterrupt(ENCODER_BTN,onEncoderBtn,FALLING);
+  
+  pulsesRight=0;
+  pulsesLeft=0;
+  checkTime=0;
+  lastTurn=0;
   }
 
 }

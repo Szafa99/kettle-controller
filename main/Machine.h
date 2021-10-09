@@ -1,52 +1,37 @@
-#ifndef TS_H
-#define TS_H
+#pragma once
 
 #include "heater.h"
 #include "Engine.h"
 
 
-class Machine{
+class Machine
+{
 public:
-
-
-  static Machine& getInstance(){
+  static Machine &getInstance()
+  {
     static Machine instance;
     return instance;
   }
 
-  Machine(const Machine&) = delete;
-  void operator=(const Machine &)=delete;
+  Machine(const Machine &) = delete;
+  void operator=(const Machine &) = delete;
 
-  hw_timer_t * machineTimer=NULL;
+  hw_timer_t *machineTimer = NULL;
   Utils::AlarmTime workingTime;
 
 
-void  machineTimerTick(){
-      workingTime--;
-      Engine::getInstance().handleEngineCycles();
-      if(workingTime.timerEnded() ){
-          timerAlarmDisable(machineTimer);
-          Heater::getInstance().turnOFF();
-          Engine::getInstance().turnOFF();
-         }
 
+  void machineTimerTick();
+  void togleMachine();
+
+  bool isOn(){
+    return runing;
   }
 
 
 
-  private:
-   Machine(){
-    machineTimer=timerBegin(0,80,true);
-    timerAlarmWrite(machineTimer,1*Utils::MILLIS_CONVERT::SECOND,true);   
-    workingTime=Utils::AlarmTime(2,22);
-  }
-
+private:
+  Machine();
+  bool runing;
 };
 
-
-
-
-
-
-
-#endif

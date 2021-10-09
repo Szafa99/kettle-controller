@@ -3,60 +3,47 @@
 //SCL-P22
 #pragma once
 
-#include <Wire.h> 
-#include <LiquidCrystal_I2C.h>
+#include <SPI.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_PCD8544.h>
+
 #include "Controler.h"
 
-
-class LCD{
-
-    
-    public:
-     
-     InterfaceControler * lcdControler;
- 
-        
-      static LCD& getInstance(){
-          static  LCD instance;
-          return instance;
-      }
-
-      ~LCD(){
-        delete lcdControler;
-        }
-     
-       LiquidCrystal_I2C getLcd(){
-        return lcd;
-        }
-
-     void operator=(LCD const&)=delete;
-     LCD(LCD const&)=delete;
-
-    void onPassive();
-
-     void writeToLine(int line,char *text){
-        hideCursor();
-        lcd.setCursor(0,line);
-        lcd.print(text);
-      }
+#define WIDTH 84
+#define HEIGHT 48
+#define FONT_SIZE 7
+#define PADING 1
 
 
-    void underlineChar(int row,int column){
-        lcd.setCursor(column,row);
-        lcd.cursor();
-     }  
+class LCD
+{
 
-     void hideCursor(){
-        lcd.noCursor();
-      }
+public:
+   InterfaceControler *lcdControler;
 
+   static LCD &getInstance()
+   {
+      static LCD instance;
+      return instance;
+   }
 
-     private:      
-     LCD();
-     LiquidCrystal_I2C lcd;  
-     bool isOn=true; 
+   ~LCD()
+   {
+      delete lcdControler;
+   }
 
+   void operator=(LCD const &) = delete;
+   LCD(LCD const &) = delete;
 
-  };
-
- 
+   void onPassive();
+   void writeToLine(int,char * ,uint16_t=BLACK,uint16_t =WHITE);
+   // void writeToLine(int,char *);
+   void drawRect(int line, uint16_t=BLACK);
+   void drawLine(int line, uint16_t=BLACK );
+   void setCursor(int x,int y);
+private:
+   LCD();
+   Adafruit_PCD8544 lcd;
+   bool isOn = true;
+   int previousLine;
+};
