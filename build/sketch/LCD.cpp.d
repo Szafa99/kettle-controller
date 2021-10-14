@@ -141,7 +141,4 @@ c:\Users\andrz\Desktop\Kettle\build\sketch\LCD.cpp.o: \
  C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\Adafruit_BusIO/Adafruit_SPIDevice.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\Controler.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\MainUi.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\EngineUI.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\Utils.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\MachineUI.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20_UI.h
+ c:\Users\andrz\Desktop\Kettle\build\sketch\Utils.h

@@ -1,7 +1,6 @@
 #line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\Engine.cpp"
 #include "Engine.h"
 #include "Machine.h"
-#include "EngineUI.h"
 
 void Engine::handleEngineCycles()
 {
@@ -68,6 +67,7 @@ Utils::AlarmTime &Engine::getEngineOnPeriod()
 void Engine::setEngineOnPeriod(Utils::AlarmTime period)
 {
     this->engineOnPeriod = period;
+    
 }
 
 Utils::AlarmTime &Engine::getEngineOffPeriod()

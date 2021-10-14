@@ -12,9 +12,14 @@
 
 #define WIDTH 84
 #define HEIGHT 48
-#define FONT_SIZE 7
+#define FONT_Y_SIZE 8
+#define FONT_X_SIZE 6
 #define PADING 1
+#define OPTION_OFFSET 6
 
+#define LEFT_REC 0, 0
+#define RIGHT_REC WIDTH / 2 - PADING, 0
+#define REC_SIZE WIDTH / 2, FONT_Y_SIZE * 2 + PADING * 2
 
 class LCD
 {
@@ -37,11 +42,19 @@ public:
    LCD(LCD const &) = delete;
 
    void onPassive();
-   void writeToLine(int,char * ,uint16_t=BLACK,uint16_t =WHITE);
+   void writeToLine(int, char *, uint16_t = BLACK, uint16_t = WHITE);
    // void writeToLine(int,char *);
-   void drawRect(int line, uint16_t=BLACK);
-   void drawLine(int line, uint16_t=BLACK );
-   void setCursor(int x,int y);
+   void drawRect(int x, int y, uint16_t color = BLACK);
+   //6 chars for one line. 1-FIRST LINE ,2-SECONDS LINE
+   void writeToRec(int x, int y, char *text, int line = 2);
+   // MAX 12 chars for one line
+   void writeOption(char *text, int line = 1);
+   // drawLine Wrapper
+   void drawSelectLineInOptionWindow(int x1, int y1, uint16_t color,int length=FONT_X_SIZE*2);
+
+   void clear();
+   void drawBitMap(int x, int y, const unsigned char *map, int w,int h,  uint16_t c);
+
 private:
    LCD();
    Adafruit_PCD8544 lcd;

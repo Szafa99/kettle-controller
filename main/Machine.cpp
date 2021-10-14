@@ -1,6 +1,6 @@
 #include "Machine.h"
 #include "utils.h"
-#include "MachineUI.h"
+#include "MainUi.h"
 #include "Heater.h"
 #include "Engine.h"
 
@@ -24,7 +24,9 @@ void Machine::machineTimerTick()
         Heater::getInstance().turnOFF();
         Engine::getInstance().turnOFF();
     }
-        MachineUI::getInstance().renderTime();
+    
+    MainUI::getInstance().renderMachineTime();
+
 }
 
 
@@ -38,6 +40,6 @@ void Machine::machineTimerTick()
       timerAlarmEnable(machineTimer);
       runing = true;
     }
-        MachineUI::getInstance().renderState();
+        MainUI::getInstance().renderMachineState();
 
   }

@@ -131,4 +131,4 @@ c:\Users\andrz\Desktop\Kettle\build\sketch\Machine.cpp.o: \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6\variants\esp32/pins_arduino.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\Engine.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\utils.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\MachineUI.h
+ c:\Users\andrz\Desktop\Kettle\build\sketch\MainUi.h

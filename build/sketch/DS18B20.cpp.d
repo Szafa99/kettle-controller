@@ -128,8 +128,8 @@ c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20.cpp.o: \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/spi_flash/esp_partition.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/spi_flash/esp_spi_flash.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6\variants\esp32/pins_arduino.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20_UI.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20.h \
  C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/OneWire.h \
  C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/util/OneWire_direct_regtype.h \
- c:\users\andrz\onedrive\studia\studia\ de\dokumenty\arduino\libraries\dallastemperature\dallastemperature.h
+ c:\users\andrz\onedrive\studia\studia\ de\dokumenty\arduino\libraries\dallastemperature\dallastemperature.h \
+ c:\Users\andrz\Desktop\Kettle\build\sketch\MainUi.h

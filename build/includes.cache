@@ -85,17 +85,7 @@
     "Includepath": null
   },
   {
-    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\DS18B20_UI.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
     "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\Engine.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\EngineUI.cpp",
     "Include": "",
     "Includepath": null
   },
@@ -106,11 +96,6 @@
   },
   {
     "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\Machine.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\MachineUI.cpp",
     "Include": "",
     "Includepath": null
   },

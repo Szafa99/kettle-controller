@@ -1,7 +1,8 @@
+#pragma once
 #include "heater.h"
 #include "Controler.h"
-#include "DS18B20_UI.h"
 #include "DS18B20.h"
+#include "MainUi.h"
 
 void DS18B20::connectDS18B20()
 {
@@ -30,7 +31,7 @@ void DS18B20::updateTemperature()
 void DS18B20::setTemperature(double temperature)
 {
     this->temperature = temperature;
-    DS18B20_UI::getInstance().renderTemp(temperature);
+    MainUI::getInstance().renderTemperature();
 }
 
 double DS18B20::getTemperature()
@@ -46,7 +47,8 @@ volatile double DS18B20::getAimedTemperature()
 void DS18B20::setAimedTemperature(volatile double temp)
 {
     aimedTemperature = temp;
-    DS18B20_UI::getInstance().renderTemp(aimedTemperature);
+    MainUI::getInstance().renderAimedTemperature();
+
 }
 
  DS18B20 &DS18B20::getInstance()

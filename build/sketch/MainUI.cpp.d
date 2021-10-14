@@ -144,7 +144,8 @@ c:\Users\andrz\Desktop\Kettle\build\sketch\MainUI.cpp.o: \
  c:\Users\andrz\Desktop\Kettle\build\sketch\heater.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\Utils.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\Engine.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\EngineUI.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\MachineUI.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20_UI.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\MainUi.h
+ c:\Users\andrz\Desktop\Kettle\build\sketch\MainUi.h \
+ c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20.h \
+ C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/OneWire.h \
+ C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/util/OneWire_direct_regtype.h \
+ c:\users\andrz\onedrive\studia\studia\ de\dokumenty\arduino\libraries\dallastemperature\dallastemperature.h

@@ -129,5 +129,4 @@ c:\Users\andrz\Desktop\Kettle\build\sketch\Engine.cpp.o: \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6\cores\esp32/Esp.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/spi_flash/esp_partition.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/spi_flash/esp_spi_flash.h \
- C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6\variants\esp32/pins_arduino.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\EngineUI.h
+ C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6\variants\esp32/pins_arduino.h

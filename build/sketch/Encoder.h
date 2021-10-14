@@ -8,6 +8,9 @@ namespace Encoder{
 #define RIGHT 17
 #define ENCODER_BTN 5
 
+#define LAST_TURN_WAIT 1000
+#define LAST_PUSHBTN_WAIT 1200
+
 
 void IRAM_ATTR B_FALL();
 void IRAM_ATTR B_RISE();
@@ -90,7 +93,7 @@ portENTER_CRITICAL(&mux);
  void IRAM_ATTR onEncoderBtn(){
   portENTER_CRITICAL(&mux);
 
-   if( millis()-lastPushEncoder>500 &&  millis()-lastTurn>1000){
+   if( millis()-lastPushEncoder>LAST_PUSHBTN_WAIT &&  millis()-lastTurn>LAST_TURN_WAIT){
     LCD::getInstance().lcdControler->pushBtn();
     lastPushEncoder=millis();
     lastTurn=millis();
