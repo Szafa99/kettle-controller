@@ -3,6 +3,9 @@
 #include "Machine.h"
 #include "Encoder.h"
 #include "MainUI.h"
+#include "DS18B20.h"
+#include "heater.h"
+#include "Engine.h"
 
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
@@ -17,22 +20,28 @@ TaskHandle_t HardwereTasks;
 
 void hardwareTask(void *arg)
 {
+
   LCD::getInstance();
   MainUI::getInstance().firstRender();
+  Heater::getInstance();
+  Engine::getInstance();
   Encoder::setUp();
   timerAttachInterrupt(Machine::getInstance().machineTimer, &timerTick, true);
 
-  // for (;;)
-  // {
-  //   LCD::getInstance().lcdControler->render();
-  //   Encoder::onEncoderTurn();
-  //   // // DS18B20::getInstance().updateTemperature();
-  // }
+   for (;;)
+   {
+     LCD::getInstance().lcdControler->render();
+     LCD::getInstance().onPassive();
+     Encoder::onEncoderTurn();
+     Network::getInstance().onMachineStateChanged();
+     DS18B20::getInstance().updateTemperature();
+   }
 }
 
 void setup()
 {
-  Serial.begin(115200);
+
+  Serial.begin(9600);
   // Create filesystemon esp32
   if (!SPIFFS.begin(true))
   {
@@ -42,18 +51,14 @@ void setup()
   }
 
   // network stuff is runing on default core 1
-  // Network::createAccsesPoint();
-  hardwareTask(NULL);
+   Network::getInstance();
 
   // run the application on core 0
-  // xTaskCreatePinnedToCore(&hardwareTask, "hardwere", 2000, NULL, 2, &HardwereTasks, 0);
+    xTaskCreatePinnedToCore(&hardwareTask, "hardwere", 2108, NULL, 1, &HardwereTasks, 1);
 }
 
 void loop()
 {
   // Look for and handle WebSocket data
-    LCD::getInstance().lcdControler->render();
-    Encoder::onEncoderTurn();
-
-  // Network::webSocket.loop();
+Network::getInstance().getWebsocket().loop();
 }

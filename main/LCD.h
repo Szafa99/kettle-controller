@@ -15,6 +15,11 @@
 #define FONT_X_SIZE 6
 #define PADING 1
 #define OPTION_OFFSET 6
+#define CONTRAST 60
+#define OFF_CONTRAST 5
+#define MAX_PASIVE_TIME 10
+
+#define BACKLIGHT_PIN 5
 
 #define LEFT_REC 0, 0
 #define RIGHT_REC WIDTH / 2 - PADING, 0
@@ -50,13 +55,13 @@ public:
    void writeOption(char *text, int line = 1);
    // drawLine Wrapper
    void drawSelectLineInOptionWindow(int x1, int y1, uint16_t color,int length=FONT_X_SIZE*2);
-
    void clear();
    void drawBitMap(int x, int y, const unsigned char *map, int w,int h,  uint16_t c);
-
 private:
    LCD();
+   void display();
    Adafruit_PCD8544 lcd;
    bool isOn = true;
    int previousLine;
+   int timeSincelastDisplay;
 };

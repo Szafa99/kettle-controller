@@ -12,7 +12,7 @@
 #include <OneWire.h>
 #include <DallasTemperature.h >
 
-#define DS18B20_PIN 13
+#define DS18B20_PIN 27
 #define seconds() (millis() / 1000)
 
 class DS18B20

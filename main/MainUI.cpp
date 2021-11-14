@@ -3,6 +3,8 @@
 #include "MainUi.h"
 #include "Utils.h"
 #include "DS18B20.h"
+#include "network.h"
+
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
@@ -10,16 +12,16 @@
 void MainUI::firstRender()
 {
     char buff[7];
-    sprintf(buff," %s",Machine::getInstance().workingTime.toString()); 
+    sprintf(buff, " %s", Machine::getInstance().getWorkingTime().toString());
     LCD::getInstance().drawRect(LEFT_REC);
     LCD::getInstance().drawRect(RIGHT_REC);
     LCD::getInstance().writeToRec(LEFT_REC, "TEMP  ", 1);
     LCD::getInstance().writeToRec(RIGHT_REC, "CZAS  ", 1);
-    LCD::getInstance().writeToRec(RIGHT_REC, buff , 2);
+    LCD::getInstance().writeToRec(RIGHT_REC, buff, 2);
     LCD::getInstance().drawBitMap(LEFT_ARROW_POS, leftArrow, ARROW_SIZE, BLACK);
     LCD::getInstance().drawBitMap(RIGHT_ARROW_POS, rightArrow, ARROW_SIZE, BLACK);
-    LCD::getInstance().drawBitMap(WIDTH-14,FONT_Y_SIZE/2,minMap,minSize,BLACK);
-    LCD::getInstance().drawBitMap(WIDTH*0.44f,FONT_Y_SIZE*0.4f,celsMap,CELS_SIZE,BLACK);
+    LCD::getInstance().drawBitMap(WIDTH - 14, FONT_Y_SIZE / 2, minMap, minSize, BLACK);
+    LCD::getInstance().drawBitMap(WIDTH * 0.44f, FONT_Y_SIZE * 0.4f, celsMap, CELS_SIZE, BLACK);
     renderTemperature();
 }
 
@@ -55,7 +57,7 @@ void MainUI::pushBtn()
         Machine::getInstance().togleMachine();
         break;
     case MACHINE_ON_TIME:
-        timerEditor = &Machine::getInstance().workingTime;
+        timerEditor = &Machine::getInstance().getWorkingTimeInstance();
         editOption = MINUTES;
         editMode = true;
         break;
@@ -162,10 +164,9 @@ void MainUI::turnLeft()
 
 void MainUI::render()
 {
+
     if (!renderEnable)
         return;
-
-
 
     switch (currentOption)
     {
@@ -187,27 +188,32 @@ void MainUI::render()
     case ENGINE_OFF_CYCLE:
         renderEngineCycleOff();
         break;
-
     }
 
     if (editMode)
     {
         switch (editOption)
         {
-        case AIMED_TEMP:{
+        case AIMED_TEMP:
+        {
 
-            int lineLength = ( (abs(DS18B20::getInstance().getAimedTemperature()) -10.f)  > EPSILON ) ? 5 : 4 ;
-            LCD::getInstance().
-             drawSelectLineInOptionWindow( findCharPos(buff, '.') - (lineLength-3) , UNDERLINE_YPOS, BLACK,FONT_X_SIZE*lineLength);
+            int lineLength = ((abs(DS18B20::getInstance().getAimedTemperature()) - 10.f) > EPSILON) ? 5 : 4;
+            LCD::getInstance().drawSelectLineInOptionWindow(findCharPos(buff, '.') - (lineLength - 3), UNDERLINE_YPOS, BLACK, FONT_X_SIZE * lineLength);
         }
-            break;
+        break;
         case MINUTES:
             LCD::getInstance().drawSelectLineInOptionWindow((findCharPos(buff, ':') - 2), UNDERLINE_YPOS, BLACK);
             break;
         case SECONDS:
             LCD::getInstance().drawSelectLineInOptionWindow((findCharPos(buff, ':') + 1), UNDERLINE_YPOS, BLACK);
+            if (currentOption == ENGINE_ON_CYCLE)
+                Network::getInstance().updateEngineTimeOn();
+            if (currentOption == ENGINE_OFF_CYCLE)
+                Network::getInstance().updateEngineTimeOff();
+            if (currentOption == MACHINE_ON_TIME)
+                Network::getInstance().updateMachineTimeOn();
+
             break;
- 
         }
     }
 
@@ -237,7 +243,7 @@ void MainUI::renderAimedTemperature()
     sprintf(buff, "  CEL %.2f   ", DS18B20::getInstance().getAimedTemperature());
 
     LCD::getInstance().writeOption(buff);
-    LCD::getInstance().drawBitMap(  OPTION_OFFSET+(findCharPos(buff,'.')+3)*FONT_X_SIZE ,FONT_Y_SIZE*2.5,celsMap,CELS_SIZE,BLACK);
+    LCD::getInstance().drawBitMap(OPTION_OFFSET + (findCharPos(buff, '.') + 3) * FONT_X_SIZE, FONT_Y_SIZE * 2.5, celsMap, CELS_SIZE, BLACK);
     LCD::getInstance().writeOption(" ZMIEN TEMP ", 2);
 }
 
@@ -257,17 +263,16 @@ void MainUI::renderMachineState()
 void MainUI::renderMachineTime()
 {
 
-    sprintf(buff, " %s", Machine::getInstance().workingTime.toString());
+    sprintf(buff, " %s", Machine::getInstance().getWorkingTime().toString());
     LCD::getInstance().writeToRec(RIGHT_REC, buff);
 
     if (currentOption != MACHINE_ON_TIME)
         return;
-    sprintf(buff, "  %smin  ", Machine::getInstance().workingTime.toString());
+    sprintf(buff, "  %smin  ", Machine::getInstance().getWorkingTime().toString());
 
     LCD::getInstance().writeOption(buff);
     // LCD::getInstance().drawBitMap(  OPTION_OFFSET+(findCharPos(buff,':')+3)*FONT_X_SIZE ,FONT_Y_SIZE*2.5,minMap,minSize,BLACK);
     LCD::getInstance().writeOption(" ZMIEN CZAS ", 2);
-
 }
 
 void MainUI::renderEngineCycleOn()

@@ -238,15 +238,11 @@ c:\Users\andrz\Desktop\Kettle\build\sketch\main.ino.cpp.o: \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/esp32/hwcrypto/aes.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/esp32/rom/aes.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/mbedtls/mbedtls/error.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20.h \
- C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/OneWire.h \
- C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/util/OneWire_direct_regtype.h \
- c:\users\andrz\onedrive\studia\studia\ de\dokumenty\arduino\libraries\dallastemperature\dallastemperature.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\Engine.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\Utils.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\Machine.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\heater.h \
+ c:\Users\andrz\Desktop\Kettle\build\sketch\Utils.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\Controler.h \
+ c:\Users\andrz\Desktop\Kettle\build\sketch\Engine.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\Encoder.h \
  c:\Users\andrz\Desktop\Kettle\build\sketch\LCD.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6\libraries\SPI\src/SPI.h \
@@ -255,4 +251,8 @@ c:\Users\andrz\Desktop\Kettle\build\sketch\main.ino.cpp.o: \
  C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\Adafruit_GFX_Library/gfxfont.h \
  C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\Adafruit_PCD8544_Nokia_5110_LCD_library/Adafruit_PCD8544.h \
  C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\Adafruit_BusIO/Adafruit_SPIDevice.h \
- c:\Users\andrz\Desktop\Kettle\build\sketch\MainUI.h
+ c:\Users\andrz\Desktop\Kettle\build\sketch\MainUI.h \
+ c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20.h \
+ C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/OneWire.h \
+ C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/util/OneWire_direct_regtype.h \
+ c:\users\andrz\onedrive\studia\studia\ de\dokumenty\arduino\libraries\dallastemperature\dallastemperature.h

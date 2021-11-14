@@ -6,7 +6,7 @@
 #include "Controler.h"
 #include "Arduino.h"
 
-#define HEATERPIN 15
+#define HEATERPIN 32
 
 
 class Heater{
@@ -15,6 +15,14 @@ class Heater{
   unsigned int state;
   
   ////////////////////////////////////////////////////////////////////
+
+    Heater(){
+    state=LOW;
+    pinMode(HEATERPIN,OUTPUT);
+    digitalWrite(HEATERPIN,state);
+    Serial.println("sTARTING HEATER");
+
+    }
 
   public:
   
@@ -27,17 +35,11 @@ class Heater{
         static Heater instance;
         return instance;
       }
-  
+
+
     void operator=(Heater const&)=delete;
     Heater(Heater const&)=delete;
-
      
-    Heater(){
-    state=LOW;
-    pinMode(HEATERPIN,OUTPUT);
-    digitalWrite(HEATERPIN,state);
-
-    }
   
   void turnON(){
     state=HIGH;

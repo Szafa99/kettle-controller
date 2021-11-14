@@ -46,16 +46,6 @@
   },
   {
     "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
-    "Include": "OneWire.h",
-    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\OneWire"
-  },
-  {
-    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
-    "Include": "DallasTemperature.h",
-    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\DallasTemperature"
-  },
-  {
-    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
     "Include": "SPI.h",
     "Includepath": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\SPI\\src"
   },
@@ -73,6 +63,16 @@
     "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
     "Include": "Adafruit_SPIDevice.h",
     "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_BusIO"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "OneWire.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\OneWire"
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
+    "Include": "DallasTemperature.h",
+    "Includepath": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\DallasTemperature"
   },
   {
     "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\main.ino.cpp",
@@ -101,6 +101,11 @@
   },
   {
     "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\MainUI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\andrz\\Desktop\\Kettle\\build\\sketch\\network.cpp",
     "Include": "",
     "Includepath": null
   },
@@ -260,16 +265,6 @@
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\OneWire\\OneWire.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\DallasTemperature\\DallasTemperature.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
     "Sourcefile": "C:\\Users\\andrz\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.6\\libraries\\SPI\\src\\SPI.cpp",
     "Include": "",
     "Includepath": null
@@ -316,6 +311,16 @@
   },
   {
     "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\Adafruit_BusIO\\Adafruit_SPIDevice.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\OneWire\\OneWire.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\andrz\\OneDrive\\Studia\\Studia DE\\Dokumenty\\Arduino\\libraries\\DallasTemperature\\DallasTemperature.cpp",
     "Include": "",
     "Includepath": null
   },

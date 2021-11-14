@@ -4,6 +4,7 @@
 #include "Controler.h"
 #include "DS18B20.h"
 #include "MainUi.h"
+#include "network.h"
 
 void DS18B20::connectDS18B20()
 {
@@ -12,6 +13,7 @@ void DS18B20::connectDS18B20()
     dsb1820Wrapper.requestTemperatures();
     temperature = dsb1820Wrapper.getTempCByIndex(0);
     dsb1820Wrapper.setWaitForConversion(false);
+    Serial.printf("temp %.2f\n",temperature);
 }
 
 bool DS18B20::reachedTemperature()
@@ -49,7 +51,7 @@ void DS18B20::setAimedTemperature(volatile double temp)
 {
     aimedTemperature = temp;
     MainUI::getInstance().renderAimedTemperature();
-
+    Network::getInstance().updateAimedTemp();
 }
 
  DS18B20 &DS18B20::getInstance()
@@ -61,7 +63,7 @@ void DS18B20::setAimedTemperature(volatile double temp)
 DS18B20::DS18B20()
 {
     dsb1820Wrapper = DallasTemperature(new OneWire(DS18B20_PIN));
-    aimedTemperature = 5.0f;
+    aimedTemperature = 37.0f;
     temperature = 0.0f;
     connectDS18B20();
     lastUpdate = seconds();

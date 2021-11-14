@@ -4,13 +4,13 @@
 #include "MainUi.h"
 #include "Heater.h"
 #include "Engine.h"
-
+#include "network.h"
 
 Machine::Machine()
 {
     machineTimer = timerBegin(0, 80, true);
     timerAlarmWrite(machineTimer, 1 * Utils::MILLIS_CONVERT::SECOND, true);
-    workingTime = Utils::AlarmTime(2, 22);
+    workingTime = Utils::AlarmTime(30, 00);
     runing = false;
 }
 
@@ -24,6 +24,8 @@ void Machine::machineTimerTick()
         timerAlarmDisable(machineTimer);
         Heater::getInstance().turnOFF();
         Engine::getInstance().turnOFF();
+        runing=false;
+        Network::getInstance().machineStateChanged=true;
     }
     
     MainUI::getInstance().renderMachineTime();
@@ -31,16 +33,31 @@ void Machine::machineTimerTick()
 }
 
 
-  void Machine::togleMachine()
+  void Machine::togleMachine(bool changedByUser)
   {
     if (runing)
     {
       timerAlarmDisable(machineTimer);
       runing = false;
-    }else{
+      Network::getInstance().machineStateChanged=true;
+    }else if( workingTime.minutes >= 0 || workingTime.second > 0 ){
+      
       timerAlarmEnable(machineTimer);
       runing = true;
+      Network::getInstance().machineStateChanged=true;
     }
-        MainUI::getInstance().renderMachineState();
+  }
 
+  void Machine::setWorkingTime(Utils::AlarmTime workingTime){
+      this->workingTime = workingTime;
+      MainUI::getInstance().renderMachineTime();
+      Network::getInstance().updateMachineTimeOn();
+  }
+
+  Utils::AlarmTime Machine::getWorkingTime(){
+     return this->workingTime ;
+  }
+
+    Utils::AlarmTime& Machine::getWorkingTimeInstance(){
+     return workingTime ;
   }

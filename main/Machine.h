@@ -17,12 +17,14 @@ public:
   void operator=(const Machine &) = delete;
 
   hw_timer_t *machineTimer = NULL;
-  Utils::AlarmTime workingTime;
 
 
-
+  void setWorkingTime(Utils::AlarmTime workingTime);
+  Utils::AlarmTime getWorkingTime();
+  Utils::AlarmTime& getWorkingTimeInstance(); 
   void machineTimerTick();
-  void togleMachine();
+  void togleMachine(bool changedByUser=true);
+
 
   bool isOn(){
     return runing;
@@ -33,5 +35,7 @@ public:
 private:
   Machine();
   bool runing;
+  Utils::AlarmTime workingTime;
+
 };
 

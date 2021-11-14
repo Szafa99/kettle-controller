@@ -1,9 +1,10 @@
 #include "Engine.h"
 #include "Machine.h"
+#include "network.h"
 
 void Engine::handleEngineCycles()
 {
-    if (Machine::getInstance().workingTime.timerEnded())
+    if (Machine::getInstance().getWorkingTime().timerEnded())
         return;
 
     if (isOffTime.toSeconds() > 0)
@@ -34,6 +35,7 @@ Engine::Engine()
     isOffTime = Utils::AlarmTime(0, 0);
     bool engineOnPeriodRender = false;
     bool engineOffPeriodRender = false;
+    Serial.println("sTARTING ENGINE");
 }
 
 void Engine::turnON()
@@ -66,6 +68,7 @@ Utils::AlarmTime &Engine::getEngineOnPeriod()
 void Engine::setEngineOnPeriod(Utils::AlarmTime period)
 {
     this->engineOnPeriod = period;
+    Network::getInstance().updateEngineTimeOn();
     
 }
 
@@ -77,4 +80,6 @@ Utils::AlarmTime &Engine::getEngineOffPeriod()
 void Engine::setEngineOffPeriod(Utils::AlarmTime period)
 {
     engineOffPeriod = period;
+    Network::getInstance().updateEngineTimeOff();
+
 }

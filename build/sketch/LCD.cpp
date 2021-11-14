@@ -4,8 +4,14 @@
 #include "LCD.h"
 #include "MainUi.h"
 
-LCD::LCD() : lcd(Adafruit_PCD8544(18, 23, 4, 15, 2))
+LCD::LCD() : lcd(Adafruit_PCD8544(
+    18,  // SCLK PIN
+    23,  // DIN pin 
+    19,   // DC PIN
+    21,  // CS PIN
+    3))  //RESET PIN
 {
+
 
     lcd.begin();
     lcd.clearDisplay();
@@ -15,8 +21,17 @@ LCD::LCD() : lcd(Adafruit_PCD8544(18, 23, 4, 15, 2))
     lcd.display();
     delay(100);
 
+    timeSincelastDisplay=0;
+    pinMode(BACKLIGHT_PIN,OUTPUT);
+    digitalWrite(BACKLIGHT_PIN,LOW);
     lcdControler = &MainUI::getInstance();
     previousLine = -1;
+
+    // pinMode(4, OUTPUT);
+    // pinMode(15, OUTPUT);
+    // digitalWrite(4, LOW);
+    // digitalWrite(15, LOW);
+
 }
 
 void LCD::writeToLine(int line, char *text, uint16_t color, uint16_t bg)
@@ -29,7 +44,7 @@ void LCD::writeToLine(int line, char *text, uint16_t color, uint16_t bg)
         lcd.setCursor(0, line * FONT_Y_SIZE + PADING * line);
 
     lcd.println(text);
-    lcd.display();
+    display();
 }
 
 //6 chars for one line
@@ -46,19 +61,19 @@ void LCD::writeToRec(int x, int y, char *text, int line)
         lcd.setCursor(x + PADING * 2, y + PADING + FONT_Y_SIZE);
 
     lcd.println(buff);
-    lcd.display();
+    display();
 }
 
 void LCD::drawRect(int x, int y, uint16_t color)
 {
     lcd.drawRect(x, y, REC_SIZE, color);
-    lcd.display();
+    display();
 }
 
-void LCD::drawSelectLineInOptionWindow(int x1, int y1, uint16_t color,int length)
-{   
-    lcd.drawFastHLine(OPTION_OFFSET + (x1*FONT_X_SIZE), y1,length,color);
-    lcd.display();
+void LCD::drawSelectLineInOptionWindow(int x1, int y1, uint16_t color, int length)
+{
+    lcd.drawFastHLine(OPTION_OFFSET + (x1 * FONT_X_SIZE), y1, length, color);
+    display();
 }
 
 void LCD::writeOption(char *text, int line)
@@ -74,16 +89,40 @@ void LCD::writeOption(char *text, int line)
         lcd.setCursor(OPTION_OFFSET, FONT_Y_SIZE * 4 + PADING * 2);
 
     lcd.println(buff);
-    lcd.display();
+    display();
+
+    if(!isOn) {
+        digitalWrite(BACKLIGHT_PIN,LOW);
+            isOn=true;
+    }
+    timeSincelastDisplay=(millis()/1000);
+
+
 }
 
 void LCD::clear()
 {
     lcd.clearDisplay();
+    display();
 }
 
-void LCD::drawBitMap(int x, int y, const unsigned char *map, int w,int h, uint16_t color)
+void LCD::drawBitMap(int x, int y, const unsigned char *map, int w, int h, uint16_t color)
 {
-    lcd.drawBitmap(x, y, map, w,h, color);
+    lcd.drawBitmap(x, y, map, w, h, color);
+    display();
+}
+
+void LCD::display()
+{
     lcd.display();
+}
+
+
+
+
+void LCD::onPassive(){
+    if ( isOn && (millis()/1000) - timeSincelastDisplay  >MAX_PASIVE_TIME ){
+            digitalWrite(BACKLIGHT_PIN,HIGH);
+        isOn=false;
+    }
 }
