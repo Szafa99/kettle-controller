@@ -1,12 +1,13 @@
 #line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\network.h"
 
-//https://shawnhymel.com/1882/how-to-create-a-web-server-with-websockets-using-an-esp32-in-arduino/
 #pragma once
 
 #include <WiFi.h>
 #include <SPIFFS.h>
 #include <ESPAsyncWebServer.h>
 #include <WebSocketsServer.h>
+
+#define ACCSES_POINT_MODE 
 
 enum MESSAGES
 {

@@ -5,6 +5,8 @@
 #include "Heater.h"
 #include "Engine.h"
 #include "network.h"
+#include "DS18B20.h"
+
 
 Machine::Machine()
 {
@@ -19,6 +21,11 @@ void Machine::machineTimerTick()
 {
     workingTime--;
     Engine::getInstance().handleEngineCycles();
+    if(DS18B20::getInstance().reachedTemperature())
+      Heater::getInstance().turnOFF();
+    else
+      Heater::getInstance().turnON();  
+
     if (workingTime.timerEnded())
     {
         timerAlarmDisable(machineTimer);
@@ -37,6 +44,8 @@ void Machine::machineTimerTick()
   {
     if (runing)
     {
+      Heater::getInstance().turnOFF();
+      Engine::getInstance().turnOFF();
       timerAlarmDisable(machineTimer);
       runing = false;
       Network::getInstance().machineStateChanged=true;

@@ -9,7 +9,7 @@ LCD::LCD() : lcd(Adafruit_PCD8544(
     23,  // DIN pin 
     19,   // DC PIN
     21,  // CS PIN
-    3))  //RESET PIN
+    3))  //RESET PIN-RX0
 {
 
 

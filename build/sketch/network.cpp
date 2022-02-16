@@ -1,6 +1,5 @@
 #line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\network.cpp"
 
-//https://shawnhymel.com/1882/how-to-create-a-web-server-with-websockets-using-an-esp32-in-arduino/
 #pragma once
 
 #include <stdlib.h>
@@ -8,6 +7,7 @@
 #include "Engine.h"
 #include "Machine.h"
 #include "network.h"
+#include "resources/Credentials.h"
 
     
 void Network::updateDS8B20(){
@@ -178,10 +178,27 @@ void Network::onMachineStateChanged(){
     server(AsyncWebServer(80) ),
     webSocket(WebSocketsServer(1337) )
     {
+        Serial.println("Network constuctor.");
         // Start access point
-          WiFi.softAP("SeryGosi", "12345678");
-          Serial.println("\nAP running\nMy IP address: ");
-          Serial.println(WiFi.softAPIP());
+        #ifdef ACCSES_POINT_MODE
+            WiFi.softAP(AP_NAME, AP_PSWD);
+            Serial.println("\nAP running\nMy IP address: ");
+            Serial.println(WiFi.softAPIP());
+         #else
+            WiFi.mode(WIFI_STA);
+            WiFi.begin(WIFI_SSID,WIFI_PSWD);
+            Serial.printf("\nConnecting to %s .",WIFI_SSID );
+            while (WiFi.status() != WL_CONNECTED){
+                Serial.print(".");
+                vTaskDelay(200);
+            }
+            int i=10;
+            while (i--)
+            {
+                vTaskDelay(200);
+            Serial.printf("Connectd. Local Ip-addr is %s \n.",WiFi.localIP());
+            }
+         #endif   
           server.on("/", HTTP_GET, onIndexRequest);
           server.onNotFound(onPageNotFound);
           server.begin();

@@ -33,6 +33,7 @@ void DS18B20::updateTemperature()
 void DS18B20::setTemperature(double temperature)
 {
     this->temperature = temperature;
+    Serial.println(temperature);
     MainUI::getInstance().renderTemperature();
 }
 

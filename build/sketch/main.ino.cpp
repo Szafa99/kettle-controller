@@ -9,15 +9,16 @@
 #include "heater.h"
 #include "Engine.h"
 
+
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
-#line 21 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
+#line 22 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
 void hardwareTask(void *arg);
-#line 41 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
+#line 42 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
 void setup();
 #line 60 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
 void loop();
-#line 12 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
+#line 13 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
 void IRAM_ATTR timerTick()
 {
   portENTER_CRITICAL(&timerMux);
@@ -50,19 +51,18 @@ void hardwareTask(void *arg)
 void setup()
 {
 
-  Serial.begin(9600);
+  Serial.begin(19200);
   // Create filesystemon esp32
   if (!SPIFFS.begin(true))
   {
     Serial.println("Error mounting SPIFFS");
-    while (1)
-      ;
+    while (1);
   }
 
   // network stuff is runing on default core 1
    Network::getInstance();
 
-  // run the application on core 0
+  // run the application on core 1
     xTaskCreatePinnedToCore(&hardwareTask, "hardwere", 2108, NULL, 1, &HardwereTasks, 1);
 }
 

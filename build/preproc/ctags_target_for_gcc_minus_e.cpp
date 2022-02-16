@@ -8,6 +8,7 @@
 
 
 
+
 portMUX_TYPE timerMux = { .owner = 0xB33FFFFF, .count = 0, };
 
 void __attribute__((section(".iram1" "." "19"))) timerTick()
@@ -42,19 +43,18 @@ void hardwareTask(void *arg)
 void setup()
 {
 
-  Serial.begin(9600);
+  Serial.begin(19200);
   // Create filesystemon esp32
   if (!SPIFFS.begin(true))
   {
     Serial.println("Error mounting SPIFFS");
-    while (1)
-      ;
+    while (1);
   }
 
   // network stuff is runing on default core 1
    Network::getInstance();
 
-  // run the application on core 0
+  // run the application on core 1
     xTaskCreatePinnedToCore(&hardwareTask, "hardwere", 2108, 
 # 57 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino" 3 4
                                                             __null

@@ -4,12 +4,14 @@
 
 namespace Encoder
 {
-#define LEFT 16
-#define RIGHT 4
-#define ENCODER_BTN 17
+#define LEFT 16// 27//RX2
+#define RIGHT 4 // 14//D4
+#define ENCODER_BTN 17 //26 // TX2
+
+
 
 #define LAST_TURN_WAIT 50
-#define LAST_PUSHBTN_WAIT 800
+#define LAST_PUSHBTN_WAIT 500
 
     void IRAM_ATTR encoderTurnInterrupt();
 
@@ -41,9 +43,13 @@ namespace Encoder
 
     void IRAM_ATTR onEncoderBtn()
     {
+             Serial.printf("btn\n");
         portENTER_CRITICAL(&mux);
         if (millis() - lastPushEncoder > LAST_PUSHBTN_WAIT && millis() - lastTurn > LAST_TURN_WAIT)
         {
+            if (millis() - lastTurn < 200){
+                LCD::getInstance().lcdControler->turnLeft();
+            }
             LCD::getInstance().lcdControler->pushBtn();
             lastPushEncoder = millis();
             lastTurn = millis();
@@ -54,7 +60,7 @@ namespace Encoder
     void onEncoderTurn()
     {
 
-        if (pulsesRight - pulsesLeft > 3)
+        if (pulsesRight - pulsesLeft > 5)
         {
             pulsesLeft = 0;
             pulsesRight = 0;
@@ -65,7 +71,7 @@ namespace Encoder
             }
         }
 
-        if (pulsesLeft - pulsesRight > 3)
+       else if (pulsesLeft - pulsesRight > 3)
         {
             pulsesLeft = 0;
             pulsesRight = 0;
@@ -79,9 +85,12 @@ namespace Encoder
 
     void setUp()
     {
+          digitalWrite(ENCODER_BTN,HIGH);
+
+
         pinMode(LEFT, INPUT_PULLUP);
         pinMode(RIGHT, INPUT_PULLUP);
-        pinMode(ENCODER_BTN, INPUT_PULLDOWN);
+        pinMode(ENCODER_BTN, INPUT_PULLUP);
         lastRightPinState = digitalRead(RIGHT);
 
         attachInterrupt(LEFT, encoderTurnInterrupt, CHANGE);

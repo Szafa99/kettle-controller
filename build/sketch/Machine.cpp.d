@@ -236,4 +236,8 @@ c:\Users\andrz\Desktop\Kettle\build\sketch\Machine.cpp.o: \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/mbedtls/aes_alt.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/esp32/hwcrypto/aes.h \
  C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/esp32/rom/aes.h \
- C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/mbedtls/mbedtls/error.h
+ C:\Users\andrz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/mbedtls/mbedtls/error.h \
+ c:\Users\andrz\Desktop\Kettle\build\sketch\DS18B20.h \
+ C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/OneWire.h \
+ C:\Users\andrz\OneDrive\Studia\Studia\ DE\Dokumenty\Arduino\libraries\OneWire/util/OneWire_direct_regtype.h \
+ c:\users\andrz\onedrive\studia\studia\ de\dokumenty\arduino\libraries\dallastemperature\dallastemperature.h

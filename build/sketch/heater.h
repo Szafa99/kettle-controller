@@ -6,7 +6,7 @@
 #include "Controler.h"
 #include "Arduino.h"
 
-#define HEATERPIN 32
+#define HEATERPIN 12
 
 
 class Heater{

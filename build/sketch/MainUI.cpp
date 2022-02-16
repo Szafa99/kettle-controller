@@ -79,6 +79,7 @@ void MainUI::pushBtn()
 
 void MainUI::turnRight()
 {
+    Serial.println("Right");
     renderEnable = true;
     if (editMode)
     {
@@ -121,7 +122,7 @@ void MainUI::turnRight()
 
 void MainUI::turnLeft()
 {
-
+    Serial.println("Left");
     renderEnable = true;
 
     if (editMode)

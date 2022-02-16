@@ -120,7 +120,6 @@ void MainUI::turnRight()
 
 void MainUI::turnLeft()
 {
-
     renderEnable = true;
 
     if (editMode)
