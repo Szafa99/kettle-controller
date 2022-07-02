@@ -1,4 +1,4 @@
-#line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\DS18B20.h"
+#line 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\DS18B20.h"
 //Temperature sensor DS18B20 (Water safe) :
 //Power 3.3-5 V
 //Temp borders - -55 - +120 C

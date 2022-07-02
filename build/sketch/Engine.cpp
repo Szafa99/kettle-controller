@@ -1,7 +1,6 @@
-#line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\Engine.cpp"
+#line 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\Engine.cpp"
 #include "Engine.h"
 #include "Machine.h"
-#include "network.h"
 
 void Engine::handleEngineCycles()
 {
@@ -69,7 +68,6 @@ Utils::AlarmTime &Engine::getEngineOnPeriod()
 void Engine::setEngineOnPeriod(Utils::AlarmTime period)
 {
     this->engineOnPeriod = period;
-    Network::getInstance().updateEngineTimeOn();
     
 }
 
@@ -81,6 +79,5 @@ Utils::AlarmTime &Engine::getEngineOffPeriod()
 void Engine::setEngineOffPeriod(Utils::AlarmTime period)
 {
     engineOffPeriod = period;
-    Network::getInstance().updateEngineTimeOff();
 
 }

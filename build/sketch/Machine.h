@@ -1,4 +1,4 @@
-#line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\Machine.h"
+#line 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\Machine.h"
 #pragma once
 
 #include "heater.h"

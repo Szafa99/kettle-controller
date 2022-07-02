@@ -1,6 +1,5 @@
 #include "Engine.h"
 #include "Machine.h"
-#include "network.h"
 
 void Engine::handleEngineCycles()
 {
@@ -68,7 +67,6 @@ Utils::AlarmTime &Engine::getEngineOnPeriod()
 void Engine::setEngineOnPeriod(Utils::AlarmTime period)
 {
     this->engineOnPeriod = period;
-    Network::getInstance().updateEngineTimeOn();
     
 }
 
@@ -80,6 +78,5 @@ Utils::AlarmTime &Engine::getEngineOffPeriod()
 void Engine::setEngineOffPeriod(Utils::AlarmTime period)
 {
     engineOffPeriod = period;
-    Network::getInstance().updateEngineTimeOff();
 
 }

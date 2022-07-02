@@ -1,10 +1,8 @@
-#line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\Machine.cpp"
+#line 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\Machine.cpp"
 #include "Machine.h"
 #include "utils.h"
-#include "MainUi.h"
 #include "Heater.h"
 #include "Engine.h"
-#include "network.h"
 #include "DS18B20.h"
 
 
@@ -32,10 +30,10 @@ void Machine::machineTimerTick()
         Heater::getInstance().turnOFF();
         Engine::getInstance().turnOFF();
         runing=false;
-        Network::getInstance().machineStateChanged=true;
+        // Network::getInstance().machineStateChanged=true;
     }
     
-    MainUI::getInstance().renderMachineTime();
+    // MainUI::getInstance().renderMachineTime();
 
 }
 
@@ -48,19 +46,19 @@ void Machine::machineTimerTick()
       Engine::getInstance().turnOFF();
       timerAlarmDisable(machineTimer);
       runing = false;
-      Network::getInstance().machineStateChanged=true;
+      // Network::getInstance().machineStateChanged=true;
     }else if( workingTime.minutes >= 0 || workingTime.second > 0 ){
       
       timerAlarmEnable(machineTimer);
       runing = true;
-      Network::getInstance().machineStateChanged=true;
+      // Network::getInstance().machineStateChanged=true;
     }
   }
 
   void Machine::setWorkingTime(Utils::AlarmTime workingTime){
       this->workingTime = workingTime;
-      MainUI::getInstance().renderMachineTime();
-      Network::getInstance().updateMachineTimeOn();
+      // MainUI::getInstance().renderMachineTime();
+      // Network::getInstance().updateMachineTimeOn();
   }
 
   Utils::AlarmTime Machine::getWorkingTime(){

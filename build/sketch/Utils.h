@@ -1,4 +1,4 @@
-#line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\Utils.h"
+#line 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\Utils.h"
 #ifndef UTILS_H
 #define UTILS_H
 #include <stdio.h>
@@ -143,7 +143,6 @@ bool operator++(int){
   };
     
 
-     enum LCDPage{TEMP_PAGE,HEATER_PAGE,ENGINE_PAGE};
      enum MILLIS_CONVERT{SECOND=1000000};
      enum HeaterInterface{CHANGE_TIME,START_TIMER,STOP_TIMER,MINUTES,SECONDS,NEXT_PAGE};
      enum EngineInterface{CHANGE_ON_TIME,CHANGE_OFF_TIME,PERIOD_MINUTES,PERIOD_SECONDS,NEXT};

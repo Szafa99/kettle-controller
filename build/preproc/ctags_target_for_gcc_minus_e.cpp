@@ -1,17 +1,19 @@
-# 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
+# 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+# 2 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
-# 3 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino" 2
-# 4 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino" 2
-# 5 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino" 2
-# 6 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino" 2
-# 7 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino" 2
+# 4 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
 
+# 7 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
+# 8 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
 
+# 11 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
+
+SerialControllerInterface *serialController;
 portMUX_TYPE timerMux = { .owner = 0xB33FFFFF, .count = 0, };
 
-void __attribute__((section(".iram1" "." "19"))) timerTick()
+void __attribute__((section(".iram1" "." "16"))) timerTick()
 {
   vTaskEnterCritical(&timerMux);
   Machine::getInstance().machineTimerTick();
@@ -23,19 +25,12 @@ TaskHandle_t HardwereTasks;
 void hardwareTask(void *arg)
 {
 
-  LCD::getInstance();
-  MainUI::getInstance().firstRender();
   Heater::getInstance();
   Engine::getInstance();
-  Encoder::setUp();
   timerAttachInterrupt(Machine::getInstance().machineTimer, &timerTick, true);
 
    for (;;)
    {
-     LCD::getInstance().lcdControler->render();
-     LCD::getInstance().onPassive();
-     Encoder::onEncoderTurn();
-     Network::getInstance().onMachineStateChanged();
      DS18B20::getInstance().updateTemperature();
    }
 }
@@ -43,27 +38,16 @@ void hardwareTask(void *arg)
 void setup()
 {
 
-  Serial.begin(19200);
-  // Create filesystemon esp32
-  if (!SPIFFS.begin(true))
-  {
-    Serial.println("Error mounting SPIFFS");
-    while (1);
-  }
-
-  // network stuff is runing on default core 1
-   Network::getInstance();
-
-  // run the application on core 1
+  Serial.begin(9600);
+  serialController =new SerialControllerImpl();
     xTaskCreatePinnedToCore(&hardwareTask, "hardwere", 2108, 
-# 57 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino" 3 4
+# 42 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
                                                             __null
-# 57 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\main.ino"
+# 42 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
                                                                 , 1, &HardwereTasks, 1);
 }
 
 void loop()
 {
-  // Look for and handle WebSocket data
-Network::getInstance().getWebsocket().loop();
+  serialController->listen();
 }

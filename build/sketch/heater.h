@@ -1,9 +1,8 @@
-#line 1 "c:\\Users\\andrz\\Desktop\\Kettle\\main\\heater.h"
+#line 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\heater.h"
 
 #pragma once
 
 #include "Utils.h"
-#include "Controler.h"
 #include "Arduino.h"
 
 #define HEATERPIN 12

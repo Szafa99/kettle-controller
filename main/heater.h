@@ -2,7 +2,6 @@
 #pragma once
 
 #include "Utils.h"
-#include "Controler.h"
 #include "Arduino.h"
 
 #define HEATERPIN 12
