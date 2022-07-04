@@ -3,10 +3,9 @@
 
 #include "heater.h"
 #include "Engine.h"
+#include "Observable.h"
 
-
-class Machine
-{
+class Machine: public Observable{
 public:
   static Machine &getInstance()
   {

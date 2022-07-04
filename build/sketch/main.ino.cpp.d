@@ -138,6 +138,8 @@ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\main.ino.cpp.o: \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\heater.h \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Utils.h \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Engine.h \
+ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Observable.h \
+ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Observer.h \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\DS18B20.h \
  c:\users\asz\documents\arduino\libraries\dallastemperature\dallastemperature.h \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\SerialControllerImpl.h \

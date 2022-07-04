@@ -40,11 +40,13 @@ void setup()
 
   Serial.begin(9600);
   serialController =new SerialControllerImpl();
-    xTaskCreatePinnedToCore(&hardwareTask, "hardwere", 2108, 
-# 42 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
-                                                            __null
-# 42 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
-                                                                , 1, &HardwereTasks, 1);
+  // Machine::getInstance().addObserver( serialController);
+  serialController->observe(&Machine::getInstance());
+  xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, 
+# 44 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
+                                                          __null
+# 44 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+                                                              , 1, &HardwereTasks, 1);
 }
 
 void loop()

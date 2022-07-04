@@ -3,7 +3,7 @@
 
 #include "Utils.h"
 #include "Arduino.h"
-
+#include "Observer.h"
 #define HEATERPIN 12
 
 
@@ -18,13 +18,11 @@ class Heater{
     state=LOW;
     pinMode(HEATERPIN,OUTPUT);
     digitalWrite(HEATERPIN,state);
-    Serial.println("sTARTING HEATER");
+    Serial.println("STARTING HEATER");
 
     }
 
   public:
-  
-
 
 
   unsigned int getState(){return state; }

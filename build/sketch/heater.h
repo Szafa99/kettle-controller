@@ -19,13 +19,11 @@ class Heater{
     state=LOW;
     pinMode(HEATERPIN,OUTPUT);
     digitalWrite(HEATERPIN,state);
-    Serial.println("sTARTING HEATER");
+    Serial.println("STARTING HEATER");
 
     }
 
   public:
-  
-
 
 
   unsigned int getState(){return state; }

@@ -22,17 +22,18 @@ void Machine::machineTimerTick()
       Heater::getInstance().turnOFF();
     else
       Heater::getInstance().turnON();  
+    
 
     if (workingTime.timerEnded())
     {
         timerAlarmDisable(machineTimer);
+        this->notify();
+
         Heater::getInstance().turnOFF();
         Engine::getInstance().turnOFF();
         runing=false;
-        // Network::getInstance().machineStateChanged=true;
     }
     
-    // MainUI::getInstance().renderMachineTime();
 
 }
 
@@ -45,19 +46,19 @@ void Machine::machineTimerTick()
       Engine::getInstance().turnOFF();
       timerAlarmDisable(machineTimer);
       runing = false;
-      // Network::getInstance().machineStateChanged=true;
+      this->notify();
+
     }else if( workingTime.minutes >= 0 || workingTime.second > 0 ){
       
       timerAlarmEnable(machineTimer);
       runing = true;
-      // Network::getInstance().machineStateChanged=true;
+      this->notify();
     }
+
   }
 
   void Machine::setWorkingTime(Utils::AlarmTime workingTime){
       this->workingTime = workingTime;
-      // MainUI::getInstance().renderMachineTime();
-      // Network::getInstance().updateMachineTimeOn();
   }
 
   Utils::AlarmTime Machine::getWorkingTime(){

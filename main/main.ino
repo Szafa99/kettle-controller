@@ -39,7 +39,9 @@ void setup()
 
   Serial.begin(9600);
   serialController =new SerialControllerImpl();
-    xTaskCreatePinnedToCore(&hardwareTask, "hardwere", 2108, NULL, 1, &HardwereTasks, 1);
+  // Machine::getInstance().addObserver( serialController);
+  serialController->observe(&Machine::getInstance());
+  xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, NULL, 1, &HardwereTasks, 1);
 }
 
 void loop()

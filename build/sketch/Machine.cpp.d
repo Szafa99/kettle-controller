@@ -129,6 +129,8 @@ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Machine.cpp.o: \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/spi_flash/esp_spi_flash.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6\variants\esp32/pins_arduino.h \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Engine.h \
+ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Observable.h \
+ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Observer.h \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\utils.h \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\DS18B20.h \
  C:\Users\asz\Documents\Arduino\libraries\OneWire/OneWire.h \
