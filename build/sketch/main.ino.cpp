@@ -11,16 +11,18 @@
 #include "Engine.h"
 #include "SerialControllerImpl.h"
 
+#define DEBUG_BAUD_RATE 1200 
+
 SerialControllerInterface *serialController;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
-#line 24 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 26 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void hardwareTask(void *arg);
-#line 37 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 39 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void setup();
-#line 47 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 50 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void loop();
-#line 15 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 17 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void IRAM_ATTR timerTick()
 {
   portENTER_CRITICAL(&timerMux);
@@ -47,9 +49,10 @@ void setup()
 {
 
   Serial.begin(9600);
+  Serial2.begin(DEBUG_BAUD_RATE);
   serialController =new SerialControllerImpl();
-  // Machine::getInstance().addObserver( serialController);
-  serialController->observe(&Machine::getInstance());
+  // Machine::getInstance().addObserver( &serialController);
+  serialController->observe(Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, NULL, 1, &HardwereTasks, 1);
 }
 

@@ -10,6 +10,8 @@
 
 # 11 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
+#define DEBUG_BAUD_RATE 1200
+
 SerialControllerInterface *serialController;
 portMUX_TYPE timerMux = { .owner = 0xB33FFFFF, .count = 0, };
 
@@ -39,13 +41,14 @@ void setup()
 {
 
   Serial.begin(9600);
+  Serial2.begin(1200);
   serialController =new SerialControllerImpl();
-  // Machine::getInstance().addObserver( serialController);
-  serialController->observe(&Machine::getInstance());
+  // Machine::getInstance().addObserver( &serialController);
+  serialController->observe(Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, 
-# 44 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
+# 47 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
                                                           __null
-# 44 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+# 47 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
                                                               , 1, &HardwereTasks, 1);
 }
 

@@ -10,7 +10,7 @@ void DS18B20::connectDS18B20()
     dsb1820Wrapper.requestTemperatures();
     temperature = dsb1820Wrapper.getTempCByIndex(0);
     dsb1820Wrapper.setWaitForConversion(false);
-    Serial.printf("temp %.2f\n",temperature);
+    Serial2.printf("temp %.2f\n",temperature);
 }
 
 bool DS18B20::reachedTemperature()
@@ -31,7 +31,7 @@ void DS18B20::updateTemperature()
 void DS18B20::setTemperature(double temperature)
 {
     this->temperature = temperature;
-    Serial.printf("T-%d",temperature);
+    Serial2.printf("T-%d",temperature);
 }
 
 double DS18B20::getTemperature()
@@ -49,7 +49,7 @@ void DS18B20::setAimedTemperature(volatile double temp)
     aimedTemperature = temp;
     // MainUI::getInstance().renderAimedTemperature();
     // Network::getInstance().updateAimedTemp();
-    Serial.printf("ST-%d",temperature);
+    Serial2.printf("ST-%d",temperature);
 
 }
 

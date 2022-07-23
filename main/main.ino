@@ -9,6 +9,8 @@
 #include "Engine.h"
 #include "SerialControllerImpl.h"
 
+#define DEBUG_BAUD_RATE 1200 
+
 SerialControllerInterface *serialController;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
@@ -38,8 +40,9 @@ void setup()
 {
 
   Serial.begin(9600);
+  Serial2.begin(DEBUG_BAUD_RATE);
   serialController =new SerialControllerImpl();
-  // Machine::getInstance().addObserver( serialController);
+  // Machine::getInstance().addObserver( &serialController);
   serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, NULL, 1, &HardwereTasks, 1);
 }
