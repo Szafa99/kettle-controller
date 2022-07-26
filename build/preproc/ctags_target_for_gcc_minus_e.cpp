@@ -13,6 +13,7 @@
 #define DEBUG_BAUD_RATE 1200
 
 SerialControllerInterface *serialController;
+// SerialControllerImpl *serialController;
 portMUX_TYPE timerMux = { .owner = 0xB33FFFFF, .count = 0, };
 
 void __attribute__((section(".iram1" "." "16"))) timerTick()
@@ -44,12 +45,13 @@ void setup()
   Serial2.begin(1200);
   serialController =new SerialControllerImpl();
   // Machine::getInstance().addObserver( &serialController);
-  serialController->observe(Machine::getInstance());
+  serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, 
-# 47 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
+# 48 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
                                                           __null
-# 47 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+# 48 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
                                                               , 1, &HardwereTasks, 1);
+
 }
 
 void loop()

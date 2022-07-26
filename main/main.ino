@@ -12,6 +12,7 @@
 #define DEBUG_BAUD_RATE 1200 
 
 SerialControllerInterface *serialController;
+// SerialControllerImpl *serialController;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
 void IRAM_ATTR timerTick()
@@ -45,6 +46,7 @@ void setup()
   // Machine::getInstance().addObserver( &serialController);
   serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, NULL, 1, &HardwereTasks, 1);
+
 }
 
 void loop()

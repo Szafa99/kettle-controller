@@ -34,7 +34,7 @@ Engine::Engine()
     isOffTime = Utils::AlarmTime(0, 0);
     bool engineOnPeriodRender = false;
     bool engineOffPeriodRender = false;
-    Serial.println("sTARTING ENGINE");
+    Serial2.println("sTARTING ENGINE");
 }
 
 void Engine::turnON()
