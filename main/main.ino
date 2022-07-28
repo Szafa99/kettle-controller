@@ -1,3 +1,6 @@
+#define DEBUG_BAUD_RATE 1200 
+#define ONBOARD_LED  2
+
 #include <OneWire.h>
 
 #include <DallasTemperature.h>
@@ -9,7 +12,7 @@
 #include "Engine.h"
 #include "SerialControllerImpl.h"
 
-#define DEBUG_BAUD_RATE 1200 
+
 
 SerialControllerInterface *serialController;
 // SerialControllerImpl *serialController;
@@ -39,6 +42,7 @@ void hardwareTask(void *arg)
 
 void setup()
 {
+  pinMode(ONBOARD_LED,OUTPUT);
 
   Serial.begin(9600);
   Serial2.begin(DEBUG_BAUD_RATE);

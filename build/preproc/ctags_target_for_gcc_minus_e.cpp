@@ -1,16 +1,19 @@
 # 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
-# 2 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
+#define DEBUG_BAUD_RATE 1200
+#define ONBOARD_LED 2
 
-# 4 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
-
+# 5 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
 # 7 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
-# 8 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
 
+# 10 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 # 11 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
-#define DEBUG_BAUD_RATE 1200
+
+# 14 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
+
+
 
 SerialControllerInterface *serialController;
 // SerialControllerImpl *serialController;
@@ -40,6 +43,7 @@ void hardwareTask(void *arg)
 
 void setup()
 {
+  pinMode(2,0x02);
 
   Serial.begin(9600);
   Serial2.begin(1200);
@@ -47,9 +51,9 @@ void setup()
   // Machine::getInstance().addObserver( &serialController);
   serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, 
-# 48 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
+# 52 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
                                                           __null
-# 48 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+# 52 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
                                                               , 1, &HardwereTasks, 1);
 
 }

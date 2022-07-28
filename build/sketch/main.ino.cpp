@@ -1,5 +1,8 @@
 #include <Arduino.h>
 #line 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#define DEBUG_BAUD_RATE 1200 
+#define ONBOARD_LED  2
+
 #include <OneWire.h>
 
 #include <DallasTemperature.h>
@@ -11,19 +14,19 @@
 #include "Engine.h"
 #include "SerialControllerImpl.h"
 
-#define DEBUG_BAUD_RATE 1200 
+
 
 SerialControllerInterface *serialController;
 // SerialControllerImpl *serialController;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
-#line 27 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 30 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void hardwareTask(void *arg);
-#line 40 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 43 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void setup();
-#line 52 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 56 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void loop();
-#line 18 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 21 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void IRAM_ATTR timerTick()
 {
   portENTER_CRITICAL(&timerMux);
@@ -48,6 +51,7 @@ void hardwareTask(void *arg)
 
 void setup()
 {
+  pinMode(ONBOARD_LED,OUTPUT);
 
   Serial.begin(9600);
   Serial2.begin(DEBUG_BAUD_RATE);
