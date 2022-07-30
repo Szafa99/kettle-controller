@@ -1,22 +1,21 @@
 # 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 #define DEBUG_BAUD_RATE 1200
 #define ONBOARD_LED 2
+#define DEBUG 1
 
-# 5 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
+# 6 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
-# 7 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
+# 8 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
 
-# 10 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 # 11 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
+# 12 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
 
-# 14 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
-
+# 15 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 2
 
 
 SerialControllerInterface *serialController;
-// SerialControllerImpl *serialController;
 portMUX_TYPE timerMux = { .owner = 0xB33FFFFF, .count = 0, };
 
 void __attribute__((section(".iram1" "." "16"))) timerTick()
@@ -45,15 +44,15 @@ void setup()
 {
   pinMode(2,0x02);
 
-  Serial.begin(9600);
-  Serial2.begin(1200);
+  Serial.begin(115200);
+  // Serial2.begin(DEBUG_BAUD_RATE);
   serialController =new SerialControllerImpl();
   // Machine::getInstance().addObserver( &serialController);
   serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, 
-# 52 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
+# 51 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
                                                           __null
-# 52 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+# 51 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
                                                               , 1, &HardwereTasks, 1);
 
 }

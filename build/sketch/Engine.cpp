@@ -1,26 +1,32 @@
 #line 1 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\Engine.cpp"
 #include "Engine.h"
 #include "Machine.h"
+// #define DEBUG 1
 
 void Engine::handleEngineCycles()
 {
     if (Machine::getInstance().getWorkingTime().timerEnded())
         return;
 
-    if (isOffTime.toSeconds() > 0)
-    {
-        if (!isOffTime--)
-            turnON();
-    }
-    else if (isOnTime.toSeconds() > 0)
+    if (isOnTime.toSeconds() > 0)
     {
         if (!isOnTime--)
             turnOFF();
+        else if(state==LOW)    
+            turnON();
     }
+    else if (isOffTime.toSeconds() > 0)
+    {
+        if (!isOffTime--)
+            turnON();
+        else if(state==HIGH)
+            turnOFF();
+    }
+
     else
     {
         isOffTime = engineOffPeriod;
-        isOnTime = engineOffPeriod;
+        isOnTime = engineOnPeriod;
     }
 }
 
@@ -42,12 +48,18 @@ void Engine::turnON()
 {
     state = HIGH;
     digitalWrite(ENGINE_PIN, HIGH);
+     #ifdef DEBUG
+        Serial.println("Start engine");
+     #endif
 }
 
 void Engine::turnOFF()
 {
     state = LOW;
     digitalWrite(ENGINE_PIN, LOW);
+    #ifdef DEBUG
+        Serial.println("Stop engine");
+    #endif
 }
 
 unsigned int Engine::getState()
@@ -68,6 +80,14 @@ Utils::AlarmTime &Engine::getEngineOnPeriod()
 void Engine::setEngineOnPeriod(Utils::AlarmTime period)
 {
     this->engineOnPeriod = period;
+
+    if(state==LOW || engineOnPeriod < isOnTime)
+        isOnTime = engineOnPeriod;
+
+
+    #ifdef DEBUG
+        Serial.printf("Set engineOnPer: %s\n",engineOnPeriod.toString());
+    #endif
     
 }
 
@@ -78,6 +98,12 @@ Utils::AlarmTime &Engine::getEngineOffPeriod()
 
 void Engine::setEngineOffPeriod(Utils::AlarmTime period)
 {
-    engineOffPeriod = period;
+    this->engineOffPeriod = period;
+    if(state==HIGH || engineOffPeriod < isOffTime)
+        isOffTime = engineOffPeriod;
+
+    #ifdef DEBUG
+        Serial.printf("Set engineOffPer: %s\n",engineOffPeriod.toString());
+    #endif
 
 }

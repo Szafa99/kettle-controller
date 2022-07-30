@@ -1,5 +1,6 @@
 #define DEBUG_BAUD_RATE 1200 
 #define ONBOARD_LED  2
+#define DEBUG 1
 
 #include <OneWire.h>
 
@@ -13,9 +14,7 @@
 #include "SerialControllerImpl.h"
 
 
-
 SerialControllerInterface *serialController;
-// SerialControllerImpl *serialController;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
 void IRAM_ATTR timerTick()
@@ -44,8 +43,8 @@ void setup()
 {
   pinMode(ONBOARD_LED,OUTPUT);
 
-  Serial.begin(9600);
-  Serial2.begin(DEBUG_BAUD_RATE);
+  Serial.begin(115200);
+  // Serial2.begin(DEBUG_BAUD_RATE);
   serialController =new SerialControllerImpl();
   // Machine::getInstance().addObserver( &serialController);
   serialController->observe(&Machine::getInstance());

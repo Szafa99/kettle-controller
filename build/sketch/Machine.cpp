@@ -4,6 +4,7 @@
 #include "Heater.h"
 #include "Engine.h"
 #include "DS18B20.h"
+#define DEBUG 1
 
 
 Machine::Machine()
@@ -15,6 +16,7 @@ Machine::Machine()
 }
 
 
+// main loop when machine is runing
 void Machine::machineTimerTick()
 {
     workingTime--;
@@ -28,11 +30,11 @@ void Machine::machineTimerTick()
     if (workingTime.timerEnded())
     {
         timerAlarmDisable(machineTimer);
-        this->notify();
 
         Heater::getInstance().turnOFF();
         Engine::getInstance().turnOFF();
         runing=false;
+        this->notify();
     }
     
 
@@ -43,23 +45,29 @@ void Machine::machineTimerTick()
   {
     if (runing)
     {
-      Heater::getInstance().turnOFF();
-      Engine::getInstance().turnOFF();
       timerAlarmDisable(machineTimer);
       runing = false;
-      this->notify();
-
+      // this->notify();
+      #ifdef DEBUG
+        Serial.println("Stoping machine");
+      #endif
     }else if( workingTime.minutes >= 0 || workingTime.second > 0 ){
       
       timerAlarmEnable(machineTimer);
       runing = true;
-      this->notify();
+      #ifdef DEBUG
+      Serial.println("Starting machine");
+      #endif
+      // this->notify();
     }
 
   }
 
   void Machine::setWorkingTime(Utils::AlarmTime workingTime){
       this->workingTime = workingTime;
+      #ifdef DEBUG
+        Serial.printf("Change machine time: %s\n",this->workingTime.toString());
+      #endif
   }
 
   Utils::AlarmTime Machine::getWorkingTime(){
