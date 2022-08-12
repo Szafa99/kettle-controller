@@ -1,4 +1,5 @@
 #pragma once
+#define DEBUG 1
 
 #include "heater.h"
 #include "Engine.h"
@@ -22,19 +23,22 @@ public:
   Utils::AlarmTime getWorkingTime();
   Utils::AlarmTime& getWorkingTimeInstance(); 
   void machineTimerTick();
-  void togleMachine(bool changedByUser=true);
+  // void togleMachine(bool changedByUser=true);
 
 
   bool isOn(){
     return runing;
   }
 
+ void turnOff();
+ void turnOn();
 
 
 private:
   Machine();
   bool runing;
   Utils::AlarmTime workingTime;
+  Utils::AlarmTime workingTimeSet;
 
 };
 

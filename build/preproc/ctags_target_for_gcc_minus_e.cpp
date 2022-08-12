@@ -45,14 +45,12 @@ void setup()
   pinMode(2,0x02);
 
   Serial.begin(115200);
-  // Serial2.begin(DEBUG_BAUD_RATE);
   serialController =new SerialControllerImpl();
-  // Machine::getInstance().addObserver( &serialController);
   serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, 
-# 51 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
+# 49 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
                                                           __null
-# 51 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+# 49 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
                                                               , 1, &HardwereTasks, 1);
 
 }

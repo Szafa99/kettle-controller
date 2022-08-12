@@ -4,7 +4,6 @@
 #include "Heater.h"
 #include "Engine.h"
 #include "DS18B20.h"
-#define DEBUG 1
 
 
 Machine::Machine()
@@ -12,6 +11,7 @@ Machine::Machine()
     machineTimer = timerBegin(0, 80, true);
     timerAlarmWrite(machineTimer, 1 * Utils::MILLIS_CONVERT::SECOND, true);
     workingTime = Utils::AlarmTime(30, 00);
+    workingTimeSet = workingTime; 
     runing = false;
 }
 
@@ -34,40 +34,36 @@ void Machine::machineTimerTick()
         Heater::getInstance().turnOFF();
         Engine::getInstance().turnOFF();
         runing=false;
+        workingTime = workingTimeSet; 
         this->notify();
     }
-    
-
 }
 
 
-  void Machine::togleMachine(bool changedByUser)
-  {
-    if (runing)
-    {
-      timerAlarmDisable(machineTimer);
-      runing = false;
-      // this->notify();
-      #ifdef DEBUG
-        Serial.println("Stoping machine");
-      #endif
-    }else if( workingTime.minutes >= 0 || workingTime.second > 0 ){
-      
-      timerAlarmEnable(machineTimer);
-      runing = true;
-      #ifdef DEBUG
-      Serial.println("Starting machine");
-      #endif
-      // this->notify();
-    }
-
-  }
 
   void Machine::setWorkingTime(Utils::AlarmTime workingTime){
       this->workingTime = workingTime;
-      #ifdef DEBUG
-        Serial.printf("Change machine time: %s\n",this->workingTime.toString());
-      #endif
+      workingTimeSet = workingTime; 
+
+  }
+
+  void Machine::turnOff(){
+      timerAlarmDisable(machineTimer);
+      if(Engine::getInstance().getState()==LOW && runing)
+          Serial.printf("TX/ENGINE_OFF_PERIOD_STATE/STOPPED\n"); 
+      else if(Engine::getInstance().getState()==HIGH && runing)
+          Serial.printf("TX/ENGINE_ON_PERIOD_STATE/STOPPED\n"); 
+     
+      runing = false;
+      Heater::getInstance().turnOFF();
+      Engine::getInstance().turnOFF();
+  }
+
+  void Machine::turnOn(){
+     if( workingTime.minutes >= 0 || workingTime.second > 0 ){
+      timerAlarmEnable(machineTimer);
+      runing = true;
+    }
   }
 
   Utils::AlarmTime Machine::getWorkingTime(){

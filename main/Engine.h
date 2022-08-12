@@ -30,6 +30,8 @@ public:
   void turnON();
   void turnOFF();
   void handleEngineCycles();
+  Utils::AlarmTime &getEngineOnPeriodLeft();
+  Utils::AlarmTime &getEngineOffPeriodLeft();
 
 
   static Engine &getInstance()

@@ -11,6 +11,8 @@
         const char *AIMED_TEMP = "AIMED_TEMP";
         const char *ENGINE_ON_PERIOD = "ENGINE_ON_PERIOD";
         const char *ENGINE_OFF_PERIOD = "ENGINE_OFF_PERIOD";
+        const char *ENGINE_ON_PERIOD_LEFT = "ENGINE_ON_PERIOD_LEFT";
+        const char *ENGINE_OFF_PERIOD_LEFT = "ENGINE_OFF_PERIOD_LEFT";
         const char *MACHINE_TIME = "MACHINE_TIME";
         const char *MACHINE_STATE = "MACHINE_STATE";
         const char *DS18B20_TEMP = "DS18B20_TEMP";
@@ -50,10 +52,11 @@ public:
 
 
     void update() override{
-        this->getMachineTime();
-        this->getMachineState();
-        this->getEngineOffPeriod();
-        this->getEngineOnPeriod();
+        // this->getMachineTime();
+        // this->getMachineState();
+        // this->getEngineOffPeriod();
+        // this->getEngineOnPeriod();
+        Serial.printf("%s/%s/FINISHED\n", TRANSMIT, REQUEST_METHODS::MACHINE_STATE);
     }
 
     ~SerialControllerImpl(){delete DELIMETER;}
@@ -78,14 +81,18 @@ private:
 
         DS18B20::getInstance().setAimedTemperature(newTemp);
         getAimedTemp();
-
-        Serial2.printf("New SetAimedTemp:%2.2f", DS18B20::getInstance().getAimedTemperature());
     }
 
     void getEngineOnPeriod()
     {
         const char *engineOnPeriod = Engine::getInstance().getEngineOnPeriod().toString();
         Serial.printf("%s/%s/%s\n", TRANSMIT, REQUEST_METHODS::ENGINE_ON_PERIOD, engineOnPeriod);
+    }
+
+    void getEngineOnPeriodLeft()
+    {
+        const char *engineOnPeriod = Engine::getInstance().getEngineOnPeriodLeft().toString();
+        Serial.printf("%s/%s/%s\n", TRANSMIT, REQUEST_METHODS::ENGINE_ON_PERIOD_LEFT, engineOnPeriod);
     }
 
     void setEngineOnPeriod(std::string body)
@@ -101,34 +108,23 @@ private:
         Serial.printf("%s/%s/%s\n", TRANSMIT, REQUEST_METHODS::ENGINE_OFF_PERIOD, engineOffPeriod);
     }
 
+    void getEngineOffPeriodLeft()
+    {
+        const char *engineOffPeriod = Engine::getInstance().getEngineOffPeriodLeft().toString();
+        Serial.printf("%s/%s/%s\n", TRANSMIT, REQUEST_METHODS::ENGINE_OFF_PERIOD_LEFT, engineOffPeriod);
+    }
+
     void setEngineOffPeriod(std::string body)
     {
         Utils::AlarmTime time = Utils::AlarmTime(body);
         Engine::getInstance().setEngineOffPeriod(time);
-        Serial2.printf("SetEngineOffPer:%s", time.toString());
         getEngineOffPeriod();
-    }
-
-    void getHeaterState()
-    {
-        const char *state = Heater::getInstance().getState() > 0 ? "ON" : "OFF";
-        Serial2.printf("HeaterState:%s", state);
-    }
-
-    void setHeaterState(std::string body)
-    {
-        if (body.compare("ON") == 0)
-            Heater::getInstance().turnON();
-        if (body.compare("OFF") == 0)
-            Heater::getInstance().turnOFF();
-
-        Serial2.printf("HeaterState:%d", Heater::getInstance().getState());
     }
 
     void getEngineState()
     {
         const char * state =  Engine::getInstance().getState()==0 ? "OFF" : "ON";
-        Serial2.printf("%s/%s/%s\n", TRANSMIT, "ENGINE_STATE", state);
+        Serial.printf("%s/%s/%s\n", TRANSMIT, "ENGINE_STATE", state);
     }
 
     void setEngineState(std::string body)
@@ -138,8 +134,7 @@ private:
         else if (body.compare("OFF") == 0)
             Engine::getInstance().turnOFF();
 
-        
-        Serial2.printf("POST:INFO:SET_ENGINE_STATE-OK", Engine::getInstance().getState());
+        getEngineState();
     }
 
     void getMachineState()
@@ -150,17 +145,20 @@ private:
 
     void setMachineState(std::string body)
     {
-        if (body.compare("ON") == 0 && !Machine::getInstance().isOn())
-            Machine::getInstance().togleMachine();
-        if (body.compare("OFF") == 0 && Machine::getInstance().isOn())
-            Machine::getInstance().togleMachine();
+        // Serial.printf("Got: %s\n",body.c_str());
+        Serial.printf("%s/%s/%s\n", TRANSMIT, REQUEST_METHODS::MACHINE_STATE, body.c_str());
+        if (body.compare("ON") == 0 )
+            Machine::getInstance().turnOn();
+        if (body.compare("OFF") == 0 )
+            Machine::getInstance().turnOff();
 
-        Serial2.printf("MachineState:%d", Machine::getInstance().isOn() );
+        // getMachineState();
     }
 
     void getDS18B20Temp()
     {
-        Serial.printf("%s/%s/%2.2f\n", TRANSMIT, REQUEST_METHODS::DS18B20_TEMP, DS18B20::getInstance().getTemperature());
+        Serial.printf("%s/%s/%2.2f\n", TRANSMIT, REQUEST_METHODS::DS18B20_TEMP, 
+        DS18B20::getInstance().getTemperature());
     }
 
     void getMachineTime(){
@@ -172,7 +170,6 @@ private:
         Utils::AlarmTime time = Utils::AlarmTime(body);
         Machine::getInstance().setWorkingTime(time);
         getMachineTime();
-        Serial2.printf("Machine Working time:%s", time.toString());
     }
 
     int mapSerialCommand(std::string str)
@@ -195,6 +192,12 @@ private:
 
         if (str.compare(REQUEST_METHODS::DS18B20_TEMP) == 0)
             return SerialCommand::DS18B20_TEMP;
+ 
+        if (str.compare(REQUEST_METHODS::ENGINE_ON_PERIOD_LEFT) == 0)
+            return SerialCommand::ENGINE_ON_PERIOD_LEFT;
+
+        if (str.compare(REQUEST_METHODS::ENGINE_OFF_PERIOD_LEFT) == 0)
+            return SerialCommand::ENGINE_OFF_PERIOD_LEFT;
 
 
         return -1;
@@ -225,7 +228,6 @@ private:
     void onRecieveRequest(std::string requestMapping, std::string body){
         switch (mapSerialCommand(requestMapping))
         {
-
         case SerialCommand::AIMED_TEMP:
             getAimedTemp();
             break;
@@ -244,6 +246,12 @@ private:
         case SerialCommand::DS18B20_TEMP:
             getDS18B20Temp();
             break;
+        case SerialCommand::ENGINE_ON_PERIOD_LEFT:
+            getEngineOnPeriodLeft();
+            break;
+        case SerialCommand::ENGINE_OFF_PERIOD_LEFT:
+            getEngineOffPeriodLeft();
+            break;
         }
 
     }
@@ -255,6 +263,8 @@ private:
         ENGINE_OFF_PERIOD,
         MACHINE_TIME,
         MACHINE_STATE,
+        ENGINE_ON_PERIOD_LEFT,
+        ENGINE_OFF_PERIOD_LEFT,
         DS18B20_TEMP //readOnly
     };
 

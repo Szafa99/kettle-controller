@@ -44,9 +44,7 @@ void setup()
   pinMode(ONBOARD_LED,OUTPUT);
 
   Serial.begin(115200);
-  // Serial2.begin(DEBUG_BAUD_RATE);
   serialController =new SerialControllerImpl();
-  // Machine::getInstance().addObserver( &serialController);
   serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, NULL, 1, &HardwereTasks, 1);
 

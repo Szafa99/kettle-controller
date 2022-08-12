@@ -68,8 +68,7 @@ bool operator--(){
       if(second==59 )
           if(minutes==0){
             minutes=99;
-            }
-           else
+          }else
             minutes-=1; 
       return second;
 }

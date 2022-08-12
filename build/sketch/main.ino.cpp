@@ -23,7 +23,7 @@ portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 void hardwareTask(void *arg);
 #line 42 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void setup();
-#line 55 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 53 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void loop();
 #line 20 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void IRAM_ATTR timerTick()
@@ -53,9 +53,7 @@ void setup()
   pinMode(ONBOARD_LED,OUTPUT);
 
   Serial.begin(115200);
-  // Serial2.begin(DEBUG_BAUD_RATE);
   serialController =new SerialControllerImpl();
-  // Machine::getInstance().addObserver( &serialController);
   serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, NULL, 1, &HardwereTasks, 1);
 

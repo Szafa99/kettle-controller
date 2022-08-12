@@ -17,6 +17,7 @@ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Machine.cpp.o: \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/newlib/sys/_types.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/newlib/machine/_types.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/newlib/sys/lock.h \
+ C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/newlib/assert.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/newlib/sys/types.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/newlib/machine/types.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/newlib/sys/sched.h \
@@ -41,7 +42,6 @@ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Machine.cpp.o: \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/esp32/rom/ets_sys.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/soc/soc/soc.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/esp32/esp_assert.h \
- C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/newlib/assert.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/freertos/freertos/projdefs.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/freertos/freertos/portable.h \
  C:\Users\asz\AppData\Local\Arduino15\packages\esp32\hardware\esp32\1.0.6/tools/sdk/include/freertos/freertos/deprecated_definitions.h \
