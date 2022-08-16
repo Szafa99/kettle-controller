@@ -31,6 +31,8 @@ void hardwareTask(void *arg)
 
   Heater::getInstance();
   Engine::getInstance();
+   DS18B20::getInstance().connectDS18B20();
+
   timerAttachInterrupt(Machine::getInstance().machineTimer, &timerTick, true);
 
    for (;;)

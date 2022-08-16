@@ -130,4 +130,8 @@ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\DS18B20.cpp.o: \
  c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\DS18B20.h \
  C:\Users\asz\Documents\Arduino\libraries\OneWire/OneWire.h \
  C:\Users\asz\Documents\Arduino\libraries\OneWire/util/OneWire_direct_regtype.h \
- c:\users\asz\documents\arduino\libraries\dallastemperature\dallastemperature.h
+ c:\users\asz\documents\arduino\libraries\dallastemperature\dallastemperature.h \
+ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Machine.h \
+ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Engine.h \
+ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Observable.h \
+ c:\Users\asz\Desktop\projekty\Cheese-Kettle\build\sketch\Observer.h

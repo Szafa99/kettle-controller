@@ -21,9 +21,9 @@ portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
 #line 29 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void hardwareTask(void *arg);
-#line 42 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 44 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void setup();
-#line 53 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+#line 55 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void loop();
 #line 20 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
 void IRAM_ATTR timerTick()
@@ -40,6 +40,8 @@ void hardwareTask(void *arg)
 
   Heater::getInstance();
   Engine::getInstance();
+   DS18B20::getInstance().connectDS18B20();
+
   timerAttachInterrupt(Machine::getInstance().machineTimer, &timerTick, true);
 
    for (;;)

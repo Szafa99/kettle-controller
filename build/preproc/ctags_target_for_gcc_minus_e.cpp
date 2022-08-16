@@ -32,6 +32,8 @@ void hardwareTask(void *arg)
 
   Heater::getInstance();
   Engine::getInstance();
+   DS18B20::getInstance().connectDS18B20();
+
   timerAttachInterrupt(Machine::getInstance().machineTimer, &timerTick, true);
 
    for (;;)
@@ -48,9 +50,9 @@ void setup()
   serialController =new SerialControllerImpl();
   serialController->observe(&Machine::getInstance());
   xTaskCreatePinnedToCore(&hardwareTask, "hardware", 2108, 
-# 49 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
+# 51 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino" 3 4
                                                           __null
-# 49 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
+# 51 "c:\\Users\\asz\\Desktop\\projekty\\Cheese-Kettle\\main\\main.ino"
                                                               , 1, &HardwereTasks, 1);
 
 }

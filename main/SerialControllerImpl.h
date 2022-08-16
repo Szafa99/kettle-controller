@@ -29,8 +29,6 @@ public:
     void onSerialMessage(std::string serialMsg) override
     {
 
-        //   Serial.println(serialMsg.c_str());
-
 
         if (!serialMsg.empty() && serialMsg[serialMsg.length() - 1] == '\n')
             serialMsg.erase(serialMsg.length() - 1);
@@ -52,10 +50,6 @@ public:
 
 
     void update() override{
-        // this->getMachineTime();
-        // this->getMachineState();
-        // this->getEngineOffPeriod();
-        // this->getEngineOnPeriod();
         Serial.printf("%s/%s/FINISHED\n", TRANSMIT, REQUEST_METHODS::MACHINE_STATE);
     }
 
@@ -78,7 +72,6 @@ private:
     void setAimedTemp(std::string body)
     {
         double newTemp = atof(body.c_str());
-
         DS18B20::getInstance().setAimedTemperature(newTemp);
         getAimedTemp();
     }
@@ -157,8 +150,7 @@ private:
 
     void getDS18B20Temp()
     {
-        Serial.printf("%s/%s/%2.2f\n", TRANSMIT, REQUEST_METHODS::DS18B20_TEMP, 
-        DS18B20::getInstance().getTemperature());
+        Serial.printf("%s/%s/%2.2f\n", TRANSMIT, REQUEST_METHODS::DS18B20_TEMP,DS18B20::getInstance().getTemperature());
     }
 
     void getMachineTime(){

@@ -1,6 +1,5 @@
 #include "Engine.h"
 #include "Machine.h"
-// #define DEBUG 1
 
 void Engine::handleEngineCycles()
 {
@@ -53,14 +52,12 @@ Engine::Engine()
 
 void Engine::turnON()
 {
-    // Serial.printf("TX/ENGINE_ON_PERIOD_START/1\n"); 
     state = HIGH;
     digitalWrite(ENGINE_PIN, HIGH);
 }
 
 void Engine::turnOFF()
 {
-    // Serial.printf("TX/ENGINE_OFF_PERIOD_START/2 \n"); 
     state = LOW;
     digitalWrite(ENGINE_PIN, LOW);
 }
@@ -86,11 +83,6 @@ void Engine::setEngineOnPeriod(Utils::AlarmTime period)
 
     if(state==LOW || engineOnPeriod < isOnTime)
         isOnTime = engineOnPeriod;
-
-    #ifdef DEBUG
-        Serial.printf("Set isOnTime: %s\n",isOnTime.toString());
-    #endif
-    
 }
 
 Utils::AlarmTime &Engine::getEngineOffPeriod()
@@ -113,9 +105,4 @@ void Engine::setEngineOffPeriod(Utils::AlarmTime period)
     this->engineOffPeriod = period;
     if(state==HIGH || engineOffPeriod < isOffTime || Machine::getInstance().isOn() == false )
         isOffTime = engineOffPeriod;
-
-    #ifdef DEBUG
-        Serial.printf("isOffTime: %s\n",isOffTime.toString());
-    #endif
-
 }

@@ -20,11 +20,12 @@ void Machine::machineTimerTick()
 {
     workingTime--;
     Engine::getInstance().handleEngineCycles();
-    if(DS18B20::getInstance().reachedTemperature())
+    if(DS18B20::getInstance().reachedTemperature()){
       Heater::getInstance().turnOFF();
-    else
+    }
+    else{
       Heater::getInstance().turnON();  
-    
+    }
 
     if (workingTime.timerEnded())
     {

@@ -1,6 +1,7 @@
 #pragma once
 #include "heater.h"
 #include "DS18B20.h"
+#include "Machine.h"
 
 
 void DS18B20::connectDS18B20()
@@ -10,17 +11,18 @@ void DS18B20::connectDS18B20()
     dsb1820Wrapper.requestTemperatures();
     temperature = dsb1820Wrapper.getTempCByIndex(0);
     dsb1820Wrapper.setWaitForConversion(false);
-    Serial2.printf("temp %.2f\n",temperature);
 }
 
 bool DS18B20::reachedTemperature()
 {
-    return abs(aimedTemperature - temperature) < 1.5f;
+    bool reached = (aimedTemperature-0.5f < temperature);
+    return reached;
 }
 
 void DS18B20::updateTemperature()
 {
-    if (seconds() - lastUpdate > 20 && dsb1820Wrapper.isConversionComplete())
+    
+    if (seconds() - lastUpdate > 10 && dsb1820Wrapper.isConversionComplete())
     {
         setTemperature(dsb1820Wrapper.getTempCByIndex(0));
         dsb1820Wrapper.requestTemperatures();
@@ -31,7 +33,6 @@ void DS18B20::updateTemperature()
 void DS18B20::setTemperature(double temperature)
 {
     this->temperature = temperature;
-    Serial2.printf("T-%d",temperature);
 }
 
 double DS18B20::getTemperature()
@@ -46,11 +47,7 @@ volatile double DS18B20::getAimedTemperature()
 
 void DS18B20::setAimedTemperature(volatile double temp)
 {
-    aimedTemperature = temp;
-    // MainUI::getInstance().renderAimedTemperature();
-    // Network::getInstance().updateAimedTemp();
-    Serial2.printf("ST-%d",temperature);
-
+    this->aimedTemperature = temp;
 }
 
  DS18B20 &DS18B20::getInstance()
@@ -62,7 +59,7 @@ void DS18B20::setAimedTemperature(volatile double temp)
 DS18B20::DS18B20()
 {
     dsb1820Wrapper = DallasTemperature(new OneWire(DS18B20_PIN));
-    aimedTemperature = 37.0f;
+    aimedTemperature = 29.0f;
     temperature = 0.0f;
     connectDS18B20();
     lastUpdate = seconds();

@@ -40,11 +40,13 @@ class Heater{
   void turnON(){
     state=HIGH;
     digitalWrite(HEATERPIN,HIGH);
+    // Serial.println("Heater turnOn");
     }
 
   void turnOFF(){
     state=LOW;
     digitalWrite(HEATERPIN,LOW);
+    // Serial.println("Heater turnOff");
     }
      
 };
