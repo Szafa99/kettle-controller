@@ -1,0 +1,5 @@
+*.zip
+.vscode/*
+build/
+main/resources/Credentials.h
+
